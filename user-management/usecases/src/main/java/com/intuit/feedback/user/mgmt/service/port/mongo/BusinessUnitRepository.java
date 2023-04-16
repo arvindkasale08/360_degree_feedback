@@ -1,10 +1,10 @@
-package com.intuit.feedback.user.mgmt.domain.ports.service;
+package com.intuit.feedback.user.mgmt.service.port.mongo;
 
 import com.intuit.feedback.user.mgmt.domain.bo.user.BusinessUnitBo;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface BusinessUnitService {
+public interface BusinessUnitRepository {
 
 	Mono<BusinessUnitBo> createBusinessUnit(BusinessUnitBo businessUnitBo);
 

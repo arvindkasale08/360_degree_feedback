@@ -1,4 +1,4 @@
-package com.intuit.feedback.user.mgmt.domain.ports.persistence;
+package com.intuit.feedback.user.mgmt.service.port.mongo;
 
 import com.intuit.feedback.user.mgmt.domain.bo.user.DesignationBo;
 import reactor.core.publisher.Flux;

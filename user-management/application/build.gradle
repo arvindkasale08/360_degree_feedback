@@ -13,8 +13,10 @@ repositories {
 
 dependencies {
     implementation project(':domain')
+    implementation project(':usecases')
     implementation project(':adapters')
     implementation("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
+    implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"

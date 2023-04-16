@@ -12,8 +12,8 @@ import com.intuit.feedback.user.mgmt.domain.bo.common.ErrorDetailBo;
 import com.intuit.feedback.user.mgmt.domain.bo.exception.DuplicateKeyException;
 import com.intuit.feedback.user.mgmt.domain.bo.exception.ErrorConstants;
 import com.intuit.feedback.user.mgmt.domain.bo.user.BusinessUnitBo;
-import com.intuit.feedback.user.mgmt.domain.ports.persistence.BusinessUnitRepository;
 import com.intuit.feedback.user.mgmt.port.mongo.mapper.BusinessUnitBoEntityMapper;
+import com.intuit.feedback.user.mgmt.service.port.mongo.BusinessUnitRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

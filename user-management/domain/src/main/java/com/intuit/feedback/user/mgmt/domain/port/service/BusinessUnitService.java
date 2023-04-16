@@ -1,10 +1,10 @@
-package com.intuit.feedback.user.mgmt.domain.ports.persistence;
+package com.intuit.feedback.user.mgmt.domain.port.service;
 
 import com.intuit.feedback.user.mgmt.domain.bo.user.BusinessUnitBo;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface BusinessUnitRepository {
+public interface BusinessUnitService {
 
 	Mono<BusinessUnitBo> createBusinessUnit(BusinessUnitBo businessUnitBo);
 

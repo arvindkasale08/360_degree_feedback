@@ -1,0 +1,233 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Intuit Identity Domain API specification
+basePath: /api/account/v1
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /designations/:
+    post:
+      tags:
+        - accountManagementService
+      description: Create a Designation
+      operationId: createDesignation
+      parameters:
+        - name: createDesignationRequest
+          in: body
+          description: Designation Object to be created
+          required: true
+          schema:
+            $ref: '#/definitions/DesignationRequest'
+      responses:
+        200:
+          description: Designation created successfully
+          schema:
+            $ref: '#/definitions/DesignationResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while creating Designation
+          schema:
+            $ref: '#/definitions/Error'
+
+  /designations/{code}:
+    get:
+      tags:
+        - accountManagementService
+      description: Returns a Designation
+      operationId: getDesignation
+      parameters:
+        - name: code
+          in: path
+          description: code of designation to fetch
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Designation fetched successfully
+          schema:
+            $ref: '#/definitions/DesignationResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while fetching designation
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - accountManagementService
+      description: Updates a designation with a code
+      operationId: updateDesignation
+      parameters:
+        - name: code
+          in: path
+          description: code of the designation to update
+          required: true
+          type: string
+        - name: updateDesignationRequest
+          in: body
+          description: Designation data to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDesignationRequest'
+
+      responses:
+        200:
+          description: Connector application updated successfully.
+          schema:
+            $ref: '#/definitions/DesignationResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while fetching designation
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - accountManagementService
+      description: Deletes a Designation with a code
+      operationId: deleteDesignation
+      parameters:
+        - name: code
+          in: path
+          description: code of the designation to be delete
+          required: true
+          type: string
+      responses:
+        200:
+          description: Designation deleted successfully.
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while deleting designation
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  SecurityProtocol:
+    type: string
+    enum: &SecurityProtocol
+      - OAUTH2
+      - OIDC
+      - WS_SECURITY
+      - CYCLR
+
+  DesignationResponse:
+    type: object
+    required:
+      - code
+      - id
+      - name
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      code:
+        type: string
+
+  DesignationRequest:
+    type: object
+    required:
+      - code
+      - name
+    properties:
+      name:
+        type: string
+      code:
+        type: string
+
+  Error:
+    type: object
+    required:
+      - code
+      - status
+    properties:
+      status:
+        type: integer
+        example: 400
+        description: The HTTP status code on the response.
+        minimum: 100.0
+        maximum: 599
+      code:
+        type: string
+        example: INVALID_TRANSACTION
+        description: The error code, in SCREAMING_SNAKE_CASE.
+        pattern: ^[A-Z]+(_[A-Z]+)*$
+      message:
+        type: string
+        example: Request criteria not met.
+        description: Descriptive message summarizing the error.
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/ErrorDetail'
+
+  ErrorDetail:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: string
+        description: "The error code, in SCREAMING_SNAKE_CASE"
+        pattern: "^[A-Z]+(_[A-Z]+)*$"
+        example: 'INVALID_TRANSACTION'
+      message:
+        type: string
+        description: "descriptive error message for debugging"
+        example: 'PDF generation failed for placeholder data'
+      field:
+        type: string
+        description: "Field in the request payload causing the error. "
+        example: 'Currency is not specified on the submitted transaction.'

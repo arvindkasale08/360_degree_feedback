@@ -1,4 +1,4 @@
-package com.intuit.feedback.user.mgmt.domain.ports.service;
+package com.intuit.feedback.user.mgmt.domain.port.service;
 
 import com.intuit.feedback.user.mgmt.domain.bo.user.DesignationBo;
 import reactor.core.publisher.Flux;
