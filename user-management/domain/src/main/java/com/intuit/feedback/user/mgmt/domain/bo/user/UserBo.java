@@ -18,4 +18,5 @@ public class UserBo extends AuditableBo {
 	private String managerId;
 	private String managerName;
 	private UserStatus status;
+	private ProfileBo profile;
 }

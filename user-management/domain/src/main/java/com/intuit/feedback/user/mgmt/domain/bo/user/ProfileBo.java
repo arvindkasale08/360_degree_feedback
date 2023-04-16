@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 public class ProfileBo {
 
 	private String email;
-	private BusinessUnitBo businessUnit;
-	private DesignationBo designation;
+	private String businessUnitId;
+	private String designationId;
 	// reference to a user whose profile this is
 	private String userId;
 }
