@@ -7,6 +7,7 @@ buildscript {
 		jacksonVersion = '2.11.2'
 		jacksonDatabindVersion = '2.11.2'
 		junitVersion = '5.8.1'
+		mockitoVersion = '3.2.4'
 		orikaVersion = '1.8.0'
 		mongockVersion = '4.3.7'
 		reactorBomVersion = '2022.0.1' //'Bismuth-SR10'

@@ -21,6 +21,8 @@ dependencies {
     implementation "net.rakugakibox.spring.boot:orika-spring-boot-starter:${orikaVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
 
