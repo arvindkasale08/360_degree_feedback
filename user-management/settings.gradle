@@ -1,5 +1,5 @@
 rootProject.name = 'user-management'
 include 'application'
 include 'domain'
-include 'persistence'
+include 'adapters'
 
