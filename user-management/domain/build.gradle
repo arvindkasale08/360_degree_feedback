@@ -12,6 +12,7 @@ repositories {
 dependencies {
     implementation "org.projectlombok:lombok:${lombokVersion}"
     implementation 'io.projectreactor:reactor-core'
+    implementation "net.rakugakibox.spring.boot:orika-spring-boot-starter:${orikaVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
