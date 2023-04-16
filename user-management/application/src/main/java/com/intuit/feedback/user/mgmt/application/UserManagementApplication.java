@@ -1,4 +1,4 @@
-package com.intuit.feedback.user.mgmt;
+package com.intuit.feedback.user.mgmt.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
