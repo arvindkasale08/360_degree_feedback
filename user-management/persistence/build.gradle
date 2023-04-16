@@ -11,13 +11,14 @@ repositories {
 
 dependencies {
     implementation project(':domain')
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive:${springBootVersion}")
-    implementation("com.bol:spring-data-mongodb-encrypt:${springBootDataMongoDBEncrypt}")
-    implementation("com.fasterxml.jackson.core:jackson-core:${jacksonVersion}")
-    implementation("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}")
-    implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:${jacksonVersion}")
-    implementation("org.projectlombok:lombok:${lombokVersion}")
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb-reactive:${springBootVersion}"
+    implementation "com.bol:spring-data-mongodb-encrypt:${springBootDataMongoDBEncrypt}"
+    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:${jacksonVersion}"
+    implementation "org.projectlombok:lombok:${lombokVersion}"
+    implementation "net.rakugakibox.spring.boot:orika-spring-boot-starter:${orikaVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
