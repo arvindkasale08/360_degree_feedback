@@ -2,7 +2,10 @@ buildscript {
 	ext {
 		springBootVersion ='3.0.5'
 		springDependencyManagementVersion = '1.1.0'
+		springBootDataMongoDBEncrypt = '2.8.0'
 		lombokVersion = '1.18.24'
+		jacksonVersion = '2.11.2'
+		jacksonDatabindVersion = '2.11.2'
 		junitVersion = '5.8.1'
 	}
 }
