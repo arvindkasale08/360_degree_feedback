@@ -13,4 +13,8 @@ public interface FeedbackRepository {
 	Flux<FeedbackBo> getInitializedFeedbacksForActor(String actorId, int page, int size);
 
 	Mono<Long> getCountOfInitializedFeedbacksForActor(String actorId);
+
+	Flux<FeedbackBo> getMyFeedbacks(String actorId, int page, int size);
+
+	Mono<Long> getCountOfMyFeedbacks(String actorId);
 }

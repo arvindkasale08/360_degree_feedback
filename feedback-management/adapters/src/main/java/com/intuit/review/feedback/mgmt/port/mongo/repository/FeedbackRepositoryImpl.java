@@ -70,4 +70,34 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
 				throw new ServiceException(errorBo);
 			});
 	}
+
+	@Override
+	public Flux<FeedbackBo> getMyFeedbacks(String subjectId, int page, int size) {
+		log.info("Getting all feedbacks for subjectId={}", subjectId);
+		return repository.findAllByStatusAndSubject_Id(FeedbackStatus.FINALIZED, subjectId, PageRequest.of(page - 1, size))
+			.doOnError(throwable -> {
+				log.error("Cannot get feedbacks", throwable);
+				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+					.message("Cannot get feedbacks")
+					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+						.message(throwable.getMessage()).build()))
+					.build();
+				throw new ServiceException(errorBo);
+			})
+			.map(mapper::mapEntityToBo);
+	}
+
+	@Override
+	public Mono<Long> getCountOfMyFeedbacks(String subjectId) {
+		return repository.countByStatusAndSubject_Id(FeedbackStatus.FINALIZED, subjectId)
+			.doOnError(throwable -> {
+				log.error("Exception while counting getCountOfMyFeedbacks", throwable);
+				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+					.message("Exception while counting getCountOfMyFeedbacks")
+					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+						.message(throwable.getMessage()).build()))
+					.build();
+				throw new ServiceException(errorBo);
+			});
+	}
 }

@@ -42,14 +42,19 @@ public class FeedbackController {
 			.map(feedbackRequestResponseDTO -> new ResponseEntity<>(feedbackRequestResponseDTO, HttpStatus.OK));
 	}
 
-	@RequestMapping(value = "initializedForActor/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "assignedToActor/{id}", method = RequestMethod.GET)
 	public Mono<ResponseEntity<FeedbackListResponseDTO>> assignedToActor(@Valid @PathVariable("id") String id, @RequestParam(value = "page", required = true, defaultValue = "1") Integer page, @RequestParam(value = "size", required = false, defaultValue = "10") Integer size) {
 		Integer pageSize = getPageSize(size);
 		return feedbackHandler.getInitializedFeedbacksForActor(id, page, pageSize)
 			.map(responseDto -> new ResponseEntity<>(responseDto, HttpStatus.OK));
 	}
 
-
+	@RequestMapping(value = "me/{id}", method = RequestMethod.GET)
+	public Mono<ResponseEntity<FeedbackListResponseDTO>> getMyFeedbacks(@Valid @PathVariable("id") String id, @RequestParam(value = "page", required = true, defaultValue = "1") Integer page, @RequestParam(value = "size", required = false, defaultValue = "10") Integer size) {
+		Integer pageSize = getPageSize(size);
+		return feedbackHandler.getMyFeedbacks(id, page, pageSize)
+			.map(responseDto -> new ResponseEntity<>(responseDto, HttpStatus.OK));
+	}
 
 	private Integer getPageSize(Integer size) {
 		if (size <= 0) {

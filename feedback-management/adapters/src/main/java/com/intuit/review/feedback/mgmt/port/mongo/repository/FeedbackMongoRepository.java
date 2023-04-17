@@ -15,4 +15,8 @@ public interface FeedbackMongoRepository extends ReactiveMongoRepository<Feedbac
 	Flux<Feedback> findAllByStatusAndActor_Id(FeedbackStatus status, String actorId, Pageable pageable);
 
 	Mono<Long> countByActor_Id(String actorId);
+
+	Flux<Feedback> findAllByStatusAndSubject_Id(FeedbackStatus status, String subjectId, Pageable pageable);
+
+	Mono<Long> countByStatusAndSubject_Id(FeedbackStatus status, String actorId);
 }
