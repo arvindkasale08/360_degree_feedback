@@ -9,6 +9,7 @@ import com.intuit.feedback.user.mgmt.port.api.model.DesignationResponseDTO;
 import com.intuit.feedback.user.mgmt.port.http.mapper.DesignationRequestDtoBoMapper;
 import com.intuit.feedback.user.mgmt.port.http.mapper.DesignationResponseDtoBoMapper;
 import com.intuit.feedback.user.mgmt.service.account.DesignationUC;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -32,7 +33,5 @@ public class DesignationHandler {
 			.flatMap(designationUC::updateDesignation)
 			.map(responseDtoBoMapper::mapBoToDto);
 	}
-
-	public Flux<DesignationR>
 
 }
