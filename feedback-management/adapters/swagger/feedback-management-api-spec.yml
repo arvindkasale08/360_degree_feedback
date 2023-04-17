@@ -1,0 +1,142 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Intuit Review Domain API specification
+basePath: /api/review/v1
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /feedbackRequests/:
+    post:
+      tags:
+        - feedbackManagementService
+      description: Create a Feedback Request
+      operationId: createFeedbackRequest
+      parameters:
+        - name: createFeedbackRequest
+          in: body
+          description: Feedback Request Object to be created
+          required: true
+          schema:
+            $ref: '#/definitions/FeedbackRequestRequest'
+      responses:
+        200:
+          description: Feedback Request created successfully
+          schema:
+            $ref: '#/definitions/FeedbackRequestResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while creating Feedback Request
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  FeedbackRequestResponse:
+    type: object
+    properties:
+      id:
+        type: string
+      requestor:
+        $ref: '#/definitions/FeedbackUser'
+      subject:
+        $ref: '#/definitions/FeedbackUser'
+      actor:
+        $ref: '#/definitions/FeedbackUser'
+      validTill:
+        type: string
+      status:
+        $ref: '#/definitions/FeedbackRequestStatus'
+
+  FeedbackUser:
+    type: object
+    properties:
+      id:
+        type: string
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+
+  FeedbackRequestStatus:
+    type: string
+    enum: &FeedbackRequestStatus
+      - INITIATED
+      - CLOSED
+
+  FeedbackRequestRequest:
+    type: object
+    required:
+      - requestorId
+      - subjectId
+      - actorId
+    properties:
+      requestorId:
+        type: string
+      subjectId:
+        type: string
+      actorId:
+        type: string
+
+  Error:
+    type: object
+    required:
+      - code
+      - status
+    properties:
+      status:
+        type: integer
+        example: 400
+        description: The HTTP status code on the response.
+        minimum: 100.0
+        maximum: 599
+      code:
+        type: string
+        example: INVALID_TRANSACTION
+        description: The error code, in SCREAMING_SNAKE_CASE.
+        pattern: ^[A-Z]+(_[A-Z]+)*$
+      message:
+        type: string
+        example: Request criteria not met.
+        description: Descriptive message summarizing the error.
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/ErrorDetail'
+
+  ErrorDetail:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: string
+        description: "The error code, in SCREAMING_SNAKE_CASE"
+        pattern: "^[A-Z]+(_[A-Z]+)*$"
+        example: 'INVALID_TRANSACTION'
+      message:
+        type: string
+        description: "descriptive error message for debugging"
+        example: 'PDF generation failed for placeholder data'
+      field:
+        type: string
+        description: "Field in the request payload causing the error. "
+        example: 'Currency is not specified on the submitted transaction.'

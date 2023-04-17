@@ -32,10 +32,10 @@ dependencies {
     swaggerCodegen 'io.swagger:swagger-codegen-cli:2.4.31'
 }
 
-/*
+
 swaggerSources {
-    accountManagement {
-        inputFile = file('swagger/user-management-api-spec.yml')
+    feedbackManagement {
+        inputFile = file('swagger/feedback-management-api-spec.yml')
         code {
             language = 'spring'
             configFile = file('swagger/config.json')
@@ -45,10 +45,9 @@ swaggerSources {
 }
 
 // Configure compile task dependency and source
-compileJava.dependsOn swaggerSources.accountManagement.code
-sourceSets.main.java.srcDir "${swaggerSources.accountManagement.code.outputDir}/src/main/java"
-sourceSets.main.resources.srcDir "${swaggerSources.accountManagement.code.outputDir}/src/main/resources"
-*/
+compileJava.dependsOn swaggerSources.feedbackManagement.code
+sourceSets.main.java.srcDir "${swaggerSources.feedbackManagement.code.outputDir}/src/main/java"
+sourceSets.main.resources.srcDir "${swaggerSources.feedbackManagement.code.outputDir}/src/main/resources"
 
 test {
     useJUnitPlatform()
