@@ -42,7 +42,7 @@ public class FeedbackRequestUC {
 			)
 			// get requestor information from user service
 			.flatMap(rb1 -> userService.getUser(lightBo.getRequestorId()).map(requestor -> {
-					rb1.setSubject(requestor);
+					rb1.setRequestor(requestor);
 					return rb1;
 				})
 			)

@@ -18,6 +18,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation("org.projectlombok:lombok:${lombokVersion}")
+    implementation "net.rakugakibox.spring.boot:orika-spring-boot-starter:${orikaVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"

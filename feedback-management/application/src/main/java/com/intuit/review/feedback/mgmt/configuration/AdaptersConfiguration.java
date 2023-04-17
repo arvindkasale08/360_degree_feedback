@@ -11,9 +11,24 @@ import com.intuit.review.feedback.mgmt.port.mongo.repository.FeedbackRequestMong
 import com.intuit.review.feedback.mgmt.port.mongo.repository.FeedbackRequestRepositoryImpl;
 import com.intuit.review.feedback.mgmt.service.feedback.FeedbackRequestUC;
 import com.intuit.review.feedback.mgmt.service.port.mongo.FeedbackRequestRepository;
+import ma.glasnost.orika.MapperFacade;
+import ma.glasnost.orika.MapperFactory;
 
 @Configuration
 public class AdaptersConfiguration {
+
+	// mappers
+	@Bean
+	public FeedbackRequestRequestDtoLightBoMapper feedbackRequestRequestDtoLightBoMapper(MapperFacade mapperFacade, MapperFactory mapperFactory) {
+		FeedbackRequestRequestDtoLightBoMapper mapper = new FeedbackRequestRequestDtoLightBoMapper(mapperFacade);
+		return mapper;
+	}
+
+	@Bean
+	public FeedbackRequestResponseDtoBoMapper feedbackRequestResponseDtoBoMapper(MapperFacade mapperFacade, MapperFactory mapperFactory) {
+		FeedbackRequestResponseDtoBoMapper mapper = new FeedbackRequestResponseDtoBoMapper(mapperFacade);
+		return mapper;
+	}
 
 	// handlers
 	@Bean

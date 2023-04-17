@@ -19,6 +19,7 @@ public class FeedbackRequestRepositoryImpl implements FeedbackRequestRepository 
 	public Mono<FeedbackRequestBo> createFeedbackRequest(FeedbackRequestBo requestBo) {
 		log.info("Saving feedback request with subjectId={} to database", requestBo.getSubject().getId());
 		return Mono.just(mapper.mapBoToEntity(requestBo))
+			.doOnNext(feedbackRequest -> log.info("Feedback request is {}", feedbackRequest.getSubject()))
 			.flatMap(repository::insert)
 			.map(mapper::mapEntityToBo);
 	}

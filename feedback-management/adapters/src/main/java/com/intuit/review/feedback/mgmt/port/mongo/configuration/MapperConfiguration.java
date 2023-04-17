@@ -28,14 +28,15 @@ public class MapperConfiguration {
 	}
 
 	@Bean
-	public FeedbackRequestBoEntityMapper feedbackRequestBoEntityMapper(MapperFacade mapperFacade, MapperFactory mapperFactory) {
-		FeedbackRequestBoEntityMapper mapper = new FeedbackRequestBoEntityMapper();
+	public FeedbackRequestBoEntityMapper feedbackRequestBoEntityMapper(MapperFacade mapperFacade, MapperFactory mapperFactory, FeedbackUserBoEntityMapper feedbackUserBoEntityMapper) {
+		FeedbackRequestBoEntityMapper mapper = new FeedbackRequestBoEntityMapper(mapperFacade, feedbackUserBoEntityMapper);
+		mapper.configure(mapperFactory);
 		return mapper;
 	}
 
 	@Bean
 	public FeedbackUserBoEntityMapper feedbackUserBoEntityMapper(MapperFacade mapperFacade, MapperFactory mapperFactory) {
-		FeedbackUserBoEntityMapper mapper = new FeedbackUserBoEntityMapper();
+		FeedbackUserBoEntityMapper mapper = new FeedbackUserBoEntityMapper(mapperFacade);
 		return mapper;
 	}
 }
