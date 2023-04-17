@@ -15,7 +15,7 @@ import com.intuit.feedback.user.mgmt.port.mongo.entity.common.AuditableEntity;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "profile")
+@Document(collection = "user")
 @EqualsAndHashCode(callSuper=false)
 public class User extends AuditableEntity {
 

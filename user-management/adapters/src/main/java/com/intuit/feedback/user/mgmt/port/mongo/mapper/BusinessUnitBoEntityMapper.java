@@ -8,11 +8,11 @@ public class BusinessUnitBoEntityMapper {
 
 	private MapperFacade mapperFacade;
 
-	public BusinessUnitBo mapEntityToBo(BusinessUnit businessUnit) {
-		return mapperFacade.map(businessUnit, BusinessUnitBo.class);
+	public BusinessUnitBo mapEntityToBo(BusinessUnit entity) {
+		return mapperFacade.map(entity, BusinessUnitBo.class);
 	}
 
-	public BusinessUnit mapBoToEntity(BusinessUnitBo businessUnitBo) {
-		return mapperFacade.map(businessUnitBo, BusinessUnit.class);
+	public BusinessUnit mapBoToEntity(BusinessUnitBo bo) {
+		return mapperFacade.map(bo, BusinessUnit.class);
 	}
 }
