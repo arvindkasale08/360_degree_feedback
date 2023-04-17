@@ -25,4 +25,10 @@ public class FeedbackRequestHandler {
 			.flatMap(feedbackRequestUC::createFeedbackRequest)
 			.map(responseDtoBoMapper::mapBoToDto);
 	}
+
+	public Mono<FeedbackRequestResponseDTO> handleGetById(String id) {
+		log.info("FeedbackRequestHandler:: getting feedback for id={}", id);
+		return feedbackRequestUC.getFeedbackRequestById(id)
+			.map(responseDtoBoMapper::mapBoToDto);
+	}
 }

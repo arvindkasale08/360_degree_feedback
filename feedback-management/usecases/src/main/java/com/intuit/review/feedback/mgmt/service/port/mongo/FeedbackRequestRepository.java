@@ -6,4 +6,6 @@ import reactor.core.publisher.Mono;
 public interface FeedbackRequestRepository {
 
 	Mono<FeedbackRequestBo> createFeedbackRequest(FeedbackRequestBo requestBo);
+
+	Mono<FeedbackRequestBo> getFeedbackRequest(String id);
 }

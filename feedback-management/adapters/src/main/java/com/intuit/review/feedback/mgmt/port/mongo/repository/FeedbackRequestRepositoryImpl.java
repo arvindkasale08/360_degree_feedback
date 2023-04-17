@@ -23,4 +23,11 @@ public class FeedbackRequestRepositoryImpl implements FeedbackRequestRepository 
 			.flatMap(repository::insert)
 			.map(mapper::mapEntityToBo);
 	}
+
+	@Override
+	public Mono<FeedbackRequestBo> getFeedbackRequest(String id) {
+		log.info("Fetching feedback request with id={} from database", id);
+		return repository.findById(id)
+			.map(mapper::mapEntityToBo);
+	}
 }

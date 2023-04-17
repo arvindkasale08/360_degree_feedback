@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,12 @@ public class FeedbackRequestController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public Mono<ResponseEntity<FeedbackRequestResponseDTO>> createFeedbackRequest(@Valid @RequestBody FeedbackRequestRequestDTO request) {
 		return feedbackRequestHandler.handleCreate(request)
+			.map(feedbackRequestResponseDTO -> new ResponseEntity<>(feedbackRequestResponseDTO, HttpStatus.OK));
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Mono<ResponseEntity<FeedbackRequestResponseDTO>> getFeedbackById(@Valid @PathVariable("id") String id) {
+		return feedbackRequestHandler.handleGetById(id)
 			.map(feedbackRequestResponseDTO -> new ResponseEntity<>(feedbackRequestResponseDTO, HttpStatus.OK));
 	}
 }

@@ -50,6 +50,10 @@ public class FeedbackRequestUC {
 			.flatMap(feedbackRequestRepository::createFeedbackRequest);
 	}
 
+	public Mono<FeedbackRequestBo> getFeedbackRequestById(String id) {
+		return feedbackRequestRepository.getFeedbackRequest(id);
+	}
+
 	private long getValidUntilTime() {
 		return Instant.now().toEpochMilli() + CommonConstant.EXPIRY;
 	}
