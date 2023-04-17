@@ -1,0 +1,71 @@
+###############################
+# APPLICATION NAME
+###############################
+application:
+  name: 360 Feedback Management
+
+
+###############################
+# PROJECT INFO
+###############################
+info:
+  build:
+    name: ${project.name}
+    version: ${project.version}
+  environment: \${environment.id}
+
+###############################
+# SERVER
+###############################
+server:
+  port: 8080
+  use-forward-headers: true
+
+########################################
+# spring mvc
+########################################
+spring:
+  application:
+    name: 360 Feedback Management
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  data:
+    mongodb:
+      database: 360-feedback-management
+      auto-index-creation: true
+
+
+###############################
+# Management Beans
+###############################
+management:
+  endpoints:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# Deactivate security on management endpoints (eg. /heath, /info)
+# management:
+#   security:
+#     enabled: false
+
+# prometheus
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+scrape_configs:
+  - job_name: 'user-management-scrape'
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ['localhost:7070']

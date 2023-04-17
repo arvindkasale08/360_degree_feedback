@@ -1,0 +1,69 @@
+buildscript {
+	ext {
+		springBootVersion ='3.0.5'
+		springDependencyManagementVersion = '1.1.0'
+		springBootDataMongoDBEncrypt = '2.8.0'
+		lombokVersion = '1.18.24'
+		jacksonVersion = '2.11.2'
+		jacksonDatabindVersion = '2.11.2'
+		junitVersion = '5.8.1'
+		mockitoVersion = '3.2.4'
+		orikaVersion = '1.8.0'
+		mongockVersion = '4.3.7'
+		reactorBomVersion = '2022.0.1' //'Bismuth-SR10'
+	}
+}
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+}
+
+group = 'com.intuit.review'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+subprojects {
+
+	group project.parent.group
+	version project.parent.version
+
+	apply plugin: 'io.spring.dependency-management'
+
+	dependencyManagement {
+		imports {
+			mavenBom "io.projectreactor:reactor-bom:${reactorBomVersion}"
+			"com.github.cloudyrock.mongock:mongock-bom:${mongockVersion}"
+		}
+	}
+
+	processResources {
+		filesMatching("**/**.yml") {
+			//expand(project.properties)
+		}
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+bootJar {
+	enabled = false
+}
+
+jar {
+	enabled = true
+}

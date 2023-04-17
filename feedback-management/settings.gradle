@@ -1,0 +1,6 @@
+rootProject.name = 'feedback-management'
+include 'adapters'
+include 'usecases'
+include 'application'
+include 'domain'
+
