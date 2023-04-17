@@ -1,10 +1,9 @@
 package com.intuit.review.feedback.mgmt.port.mongo.mapper;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-import com.intuit.review.feedback.mgmt.domain.bo.feedback.FeedbackRequestBo;
-import com.intuit.review.feedback.mgmt.port.mongo.entity.feedback.FeedbackRequest;
+import com.intuit.review.feedback.mgmt.domain.bo.feedback.FeedbackBo;
+import com.intuit.review.feedback.mgmt.port.mongo.entity.feedback.Feedback;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
@@ -19,10 +18,10 @@ public class FeedbackRequestBoEntityMapper implements OrikaMapperFactoryConfigur
 
 	@Override
 	public void configure(MapperFactory orikaMapperFactory) {
-		orikaMapperFactory.classMap(FeedbackRequest.class, FeedbackRequestBo.class)
-			.customize(new CustomMapper<FeedbackRequest, FeedbackRequestBo>() {
+		orikaMapperFactory.classMap(Feedback.class, FeedbackBo.class)
+			.customize(new CustomMapper<Feedback, FeedbackBo>() {
 				@Override
-				public void mapAtoB(FeedbackRequest entity, FeedbackRequestBo bo, MappingContext context) {
+				public void mapAtoB(Feedback entity, FeedbackBo bo, MappingContext context) {
 					//super.mapAtoB(entity, bo, context);
 					if (entity.getSubject() != null) {
 						bo.setSubject(feedbackUserBoEntityMapper.mapEntityToBo(entity.getSubject()));
@@ -36,7 +35,7 @@ public class FeedbackRequestBoEntityMapper implements OrikaMapperFactoryConfigur
 				}
 
 				@Override
-				public void mapBtoA(FeedbackRequestBo bo, FeedbackRequest entity, MappingContext context) {
+				public void mapBtoA(FeedbackBo bo, Feedback entity, MappingContext context) {
 					//super.mapBtoA(bo, entity, context);
 					if (bo.getSubject() != null) {
 						entity.setSubject(feedbackUserBoEntityMapper.mapBoToEntity(bo.getSubject()));
@@ -53,11 +52,11 @@ public class FeedbackRequestBoEntityMapper implements OrikaMapperFactoryConfigur
 			.register();
 	}
 
-	public FeedbackRequestBo mapEntityToBo(FeedbackRequest entity) {
-		return mapperFacade.map(entity, FeedbackRequestBo.class);
+	public FeedbackBo mapEntityToBo(Feedback entity) {
+		return mapperFacade.map(entity, FeedbackBo.class);
 	}
 
-	public FeedbackRequest mapBoToEntity(FeedbackRequestBo bo) {
-		return mapperFacade.map(bo, FeedbackRequest.class);
+	public Feedback mapBoToEntity(FeedbackBo bo) {
+		return mapperFacade.map(bo, Feedback.class);
 	}
 }

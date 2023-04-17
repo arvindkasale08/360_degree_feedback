@@ -13,12 +13,13 @@ import com.intuit.review.feedback.mgmt.domain.bo.common.AuditableBo;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class FeedbackRequestBo extends AuditableBo {
+public class FeedbackBo extends AuditableBo {
 
 	private String id;
 	private FeedbackUserBo requestor; // User requesting the feedback
 	private FeedbackUserBo subject; // User who is the subject of the feedback
 	private FeedbackUserBo actor; // User who is supposed to give the feedback
+	private String data; // actual feedback for subject from actor
 	private long validTill;
-	private FeedbackRequestStatus status;
+	private FeedbackStatus status;
 }

@@ -13,7 +13,7 @@ import com.intuit.review.feedback.mgmt.domain.bo.common.AuditableBo;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class FeedbackRequestLightBo extends AuditableBo {
+public class FeedbackLightBo extends AuditableBo {
 
 	private String requestorId; // User requesting the feedback
 	private String subjectId; // User who is the subject of the feedback

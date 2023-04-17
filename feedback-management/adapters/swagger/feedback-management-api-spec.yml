@@ -11,24 +11,24 @@ produces:
   - application/json
 
 paths:
-  /feedbackRequests/:
+  /feedbackRequests/initialize:
     post:
       tags:
         - feedbackManagementService
-      description: Create a Feedback Request
-      operationId: createFeedbackRequest
+      description: Initialize a feedback
+      operationId: initializeFeedback
       parameters:
-        - name: createFeedbackRequest
+        - name: initializeFeedbackRequest
           in: body
-          description: Feedback Request Object to be created
+          description: Feedback Object to be created
           required: true
           schema:
-            $ref: '#/definitions/FeedbackRequestRequest'
+            $ref: '#/definitions/InitializeFeedbackRequest'
       responses:
         200:
-          description: Feedback Request created successfully
+          description: Feedback created successfully
           schema:
-            $ref: '#/definitions/FeedbackRequestResponse'
+            $ref: '#/definitions/FeedbackResponse'
         400:
           description: Error while validating the request
           schema:
@@ -42,12 +42,22 @@ paths:
           schema:
             $ref: '#/definitions/Error'
         500:
-          description: Internal error while creating Feedback Request
+          description: Internal error while creating Feedback
           schema:
             $ref: '#/definitions/Error'
 
 definitions:
-  FeedbackRequestResponse:
+  FeedbackListResponse:
+    type: object
+    properties:
+      feedbacks:
+        type: array
+        items:
+          $ref: '#/definitions/FeedbackResponse'
+      paginationInfo:
+        $ref: '#/definitions/PaginationInfo'
+
+  FeedbackResponse:
     type: object
     properties:
       id:
@@ -58,10 +68,12 @@ definitions:
         $ref: '#/definitions/FeedbackUser'
       actor:
         $ref: '#/definitions/FeedbackUser'
+      data:
+        type: string
       validTill:
         type: string
       status:
-        $ref: '#/definitions/FeedbackRequestStatus'
+        $ref: '#/definitions/FeedbackStatus'
 
   FeedbackUser:
     type: object
@@ -75,13 +87,13 @@ definitions:
       lastName:
         type: string
 
-  FeedbackRequestStatus:
+  FeedbackStatus:
     type: string
-    enum: &FeedbackRequestStatus
-      - INITIATED
-      - CLOSED
+    enum: &FeedbackStatus
+      - INITIALIZED
+      - FINALIZED
 
-  FeedbackRequestRequest:
+  InitializeFeedbackRequest:
     type: object
     required:
       - requestorId
@@ -94,6 +106,17 @@ definitions:
         type: string
       actorId:
         type: string
+
+  PaginationInfo:
+    type: object
+    properties:
+      currentPage:
+        type: integer
+      totalPages:
+        type: integer
+      size:
+        type: integer
+        description: size of the page
 
   Error:
     type: object
