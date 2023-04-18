@@ -11,6 +11,41 @@ produces:
   - application/json
 
 paths:
+  /users/{externalId}:
+    get:
+      tags:
+        - accountManagementService
+      description: Returns a User
+      operationId: getUser
+      parameters:
+        - name: externalId
+          in: path
+          description: externalId of user to fetch
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Designation fetched successfully
+          schema:
+            $ref: '#/definitions/UserResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while fetching designation
+          schema:
+            $ref: '#/definitions/Error'
+
   /designations/:
     post:
       tags:

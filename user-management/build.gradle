@@ -20,7 +20,7 @@ plugins {
 	id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
 }
 
-group = 'com.intuit.feedback'
+group = 'com.intuit.review'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 

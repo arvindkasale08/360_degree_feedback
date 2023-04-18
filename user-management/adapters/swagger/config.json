@@ -1,6 +1,6 @@
 {
-  "modelPackage": "com.intuit.feedback.user.mgmt.port.api.model",
-  "apiPackage": "com.intuit.feedback.user.mgmt.port.api.model",
+  "modelPackage": "com.intuit.review.user.mgmt.port.http.model",
+  "apiPackage": "com.intuit.review.user.mgmt.port.http.model",
   "library": "spring-mvc",
   "dateLibrary": "java17",
   "hideGenerationTimestamp": true,
