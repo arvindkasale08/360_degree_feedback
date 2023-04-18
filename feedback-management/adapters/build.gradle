@@ -15,6 +15,7 @@ dependencies {
     implementation project(':usecases')
     implementation "org.springframework.boot:spring-boot-starter-data-mongodb-reactive:${springBootVersion}"
     implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
+    implementation("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation group: 'io.swagger', name: 'swagger-annotations', version: '1.6.10'
     implementation "com.bol:spring-data-mongodb-encrypt:${springBootDataMongoDBEncrypt}"
@@ -42,12 +43,23 @@ swaggerSources {
             components = ['models']
         }
     }
+    userManagement {
+        inputFile = file('swagger/user-management-api-spec.yml')
+        code {
+            language = 'spring'
+            configFile = file('swagger/config.json')
+            components = ['models']
+        }
+    }
 }
 
 // Configure compile task dependency and source
 compileJava.dependsOn swaggerSources.feedbackManagement.code
 sourceSets.main.java.srcDir "${swaggerSources.feedbackManagement.code.outputDir}/src/main/java"
 sourceSets.main.resources.srcDir "${swaggerSources.feedbackManagement.code.outputDir}/src/main/resources"
+compileJava.dependsOn swaggerSources.userManagement.code
+sourceSets.main.java.srcDir "${swaggerSources.userManagement.code.outputDir}/src/main/java"
+sourceSets.main.resources.srcDir "${swaggerSources.userManagement.code.outputDir}/src/main/resources"
 
 test {
     useJUnitPlatform()

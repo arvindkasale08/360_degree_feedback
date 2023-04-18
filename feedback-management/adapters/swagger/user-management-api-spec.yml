@@ -1,0 +1,293 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Intuit Identity Domain API specification
+basePath: /api/account/v1
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /users/{externalId}:
+    get:
+      tags:
+        - accountManagementService
+      description: Returns a User
+      operationId: getUser
+      parameters:
+        - name: externalId
+          in: path
+          description: externalId of user to fetch
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: User fetched successfully
+          schema:
+            $ref: '#/definitions/UserResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while fetching User
+          schema:
+            $ref: '#/definitions/Error'
+
+  /users/{externalId}/directReporting:
+    get:
+      tags:
+        - accountManagementService
+      description: Returns a List of Subordinate Users
+      operationId: getDirectReporting
+      parameters:
+        - name: externalId
+          in: path
+          description: externalId of the user for whom to fetch direct reportings
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: User's direct reportings fetched successfully
+          schema:
+            $ref: '#/definitions/UserResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while fetching user's direct reportings
+          schema:
+            $ref: '#/definitions/Error'
+
+  /designations/:
+    post:
+      tags:
+        - accountManagementService
+      description: Create a Designation
+      operationId: createDesignation
+      parameters:
+        - name: createDesignationRequest
+          in: body
+          description: Designation Object to be created
+          required: true
+          schema:
+            $ref: '#/definitions/DesignationRequest'
+      responses:
+        200:
+          description: Designation created successfully
+          schema:
+            $ref: '#/definitions/DesignationResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while creating Designation
+          schema:
+            $ref: '#/definitions/Error'
+
+  /designations/{code}:
+    get:
+      tags:
+        - accountManagementService
+      description: Returns a Designation
+      operationId: getDesignation
+      parameters:
+        - name: code
+          in: path
+          description: code of designation to fetch
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Designation fetched successfully
+          schema:
+            $ref: '#/definitions/DesignationResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while fetching designation
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - accountManagementService
+      description: Updates a designation with a code
+      operationId: updateDesignation
+      parameters:
+        - name: code
+          in: path
+          description: code of the designation to update
+          required: true
+          type: string
+        - name: updateDesignationRequest
+          in: body
+          description: Designation data to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDesignationRequest'
+
+      responses:
+        200:
+          description: Connector application updated successfully.
+          schema:
+            $ref: '#/definitions/DesignationResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while fetching designation
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - accountManagementService
+      description: Deletes a Designation with a code
+      operationId: deleteDesignation
+      parameters:
+        - name: code
+          in: path
+          description: code of the designation to be delete
+          required: true
+          type: string
+      responses:
+        200:
+          description: Designation deleted successfully.
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while deleting designation
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  UserListResponse:
+    type: object
+    properties:
+      users:
+        type: array
+        items:
+          $ref: '#/definitions/UserResponse'
+
+  DesignationResponse:
+    type: object
+    required:
+      - code
+      - id
+      - name
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      code:
+        type: string
+
+  DesignationRequest:
+    type: object
+    required:
+      - code
+      - name
+    properties:
+      name:
+        type: string
+      code:
+        type: string
+
+  UserResponse:
+    type: object
+    properties:
+      id:
+        type: string
+      externalId:
+        type: string
+      username:
+        type: string
+      managerId:
+        type: string
+      status:
+        $ref: '#/definitions/UserStatus'
+      profile:
+        $ref: '#/definitions/Profile'
+
+  Profile:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      businessUnit:
+        type: string
+      designation:
+        type: string
+
+  UserStatus:
+    type: string
+    enum: &FeedbackStatus
+      - ACTIVE
+      - EXPIRED

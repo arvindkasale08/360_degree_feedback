@@ -69,3 +69,9 @@ scrape_configs:
     metrics_path: /actuator/prometheus
     static_configs:
       - targets: ['localhost:7070']
+
+##############################
+# External Clients
+##############################
+usermgmt:
+  baseurl: http://localhost:7070
