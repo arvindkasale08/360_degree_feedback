@@ -28,10 +28,22 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
 
 	@Override
 	public Mono<FeedbackBo> initializeFeedback(FeedbackBo requestBo) {
-		log.info("Saving feedback request with subjectId={} to database", requestBo.getSubject().getId());
+		log.info("Saving feedback with subjectId={} to database", requestBo.getSubject().getId());
 		return Mono.just(mapper.mapBoToEntity(requestBo))
-			.doOnNext(feedbackRequest -> log.info("Feedback request is {}", feedbackRequest.getSubject()))
+			.doOnNext(feedbackRequest -> log.info("Feedback is {}", feedbackRequest.getSubject()))
 			.flatMap(repository::insert)
+			.map(mapper::mapEntityToBo);
+	}
+
+	@Override
+	public Mono<FeedbackBo> finalizeFeedback(FeedbackBo requestBo) {
+		log.info("Saving feedback with subjectId={} to database", requestBo.getSubject().getId());
+		return Mono.just(mapper.mapBoToEntity(requestBo))
+			.map(feedback -> {
+				feedback.setStatus(FeedbackStatus.FINALIZED);
+				return feedback;
+			})
+			.flatMap(repository::save)
 			.map(mapper::mapEntityToBo);
 	}
 

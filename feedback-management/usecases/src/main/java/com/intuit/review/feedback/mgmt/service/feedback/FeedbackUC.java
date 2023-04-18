@@ -64,6 +64,32 @@ public class FeedbackUC {
 			.flatMap(feedbackRepository::initializeFeedback);
 	}
 
+	public Mono<FeedbackBo> finalizeFeedback(String id, FeedbackLightBo lightBo) {
+		// find the feedback in the database
+		return feedbackRepository.getFeedback(id)
+			// Only initialized feedbacks can be finalized
+			.filter(feedbackBo -> feedbackBo.getStatus() == FeedbackStatus.INITIALIZED)
+			.switchIfEmpty(Mono.error(new FeedbackNotFoundException(ErrorBo.builder().code(ErrorConstants.APPLICATION_NOT_FOUND).status(404)
+				.message("Feedback with id=".concat(id).concat(" does not exist")).build()
+			)))
+			// get the data
+			.map(feedbackBo -> {
+				feedbackBo.setData(lightBo.getData());
+				return feedbackBo;
+			})
+			.flatMap(feedbackRepository::finalizeFeedback)
+			.doOnError(error -> {
+				if (!(error instanceof FeedbackNotFoundException)) {
+					ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+						.message("Error getting feedback")
+						.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+							.message(error.getMessage()).build()))
+						.build();
+					throw new ServiceException(errorBo);
+				}
+			});
+	}
+
 	/**
 	 * get a feedback from database using id
 	 * @param id

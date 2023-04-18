@@ -18,4 +18,5 @@ public class FeedbackLightBo extends AuditableBo {
 	private String requestorId; // User requesting the feedback
 	private String subjectId; // User who is the subject of the feedback
 	private String actorId; // User who is supposed to give the feedback
+	private String data;
 }

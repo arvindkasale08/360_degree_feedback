@@ -107,6 +107,14 @@ definitions:
       actorId:
         type: string
 
+  FinalizeFeedbackRequest:
+    type: object
+    required:
+      - data
+    properties:
+      data:
+        type: string
+
   PaginationInfo:
     type: object
     properties:

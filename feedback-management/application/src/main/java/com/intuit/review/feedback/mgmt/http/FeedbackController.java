@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.intuit.review.feedback.mgmt.port.http.FeedbackHandler;
 import com.intuit.review.feedback.mgmt.port.http.model.FeedbackListResponseDTO;
 import com.intuit.review.feedback.mgmt.port.http.model.FeedbackResponseDTO;
+import com.intuit.review.feedback.mgmt.port.http.model.FinalizeFeedbackRequestDTO;
 import com.intuit.review.feedback.mgmt.port.http.model.InitializeFeedbackRequestDTO;
 import reactor.core.publisher.Mono;
 
@@ -31,8 +32,14 @@ public class FeedbackController {
 	private static final Integer MAX_PAGE_SIZE = 50;
 
 	@RequestMapping(value = "initialize", method = RequestMethod.POST)
-	public Mono<ResponseEntity<FeedbackResponseDTO>> createFeedbackRequest(@Valid @RequestBody InitializeFeedbackRequestDTO request) {
+	public Mono<ResponseEntity<FeedbackResponseDTO>> initializeFeedbackRequest(@Valid @RequestBody InitializeFeedbackRequestDTO request) {
 		return feedbackHandler.handleInitialize(request)
+			.map(feedbackRequestResponseDTO -> new ResponseEntity<>(feedbackRequestResponseDTO, HttpStatus.OK));
+	}
+
+	@RequestMapping(value = "{id}/finalize", method = RequestMethod.POST)
+	public Mono<ResponseEntity<FeedbackResponseDTO>> finalizeFeedbackRequest(@Valid @PathVariable("id") String id, @Valid @RequestBody FinalizeFeedbackRequestDTO request) {
+		return feedbackHandler.handleFinalize(id, request)
 			.map(feedbackRequestResponseDTO -> new ResponseEntity<>(feedbackRequestResponseDTO, HttpStatus.OK));
 	}
 

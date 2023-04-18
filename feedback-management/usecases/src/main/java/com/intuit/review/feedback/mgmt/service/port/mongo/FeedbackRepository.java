@@ -8,9 +8,11 @@ import reactor.core.publisher.Mono;
 
 public interface FeedbackRepository {
 
-	Mono<FeedbackBo> initializeFeedback(FeedbackBo requestBo);
+	Mono<FeedbackBo> initializeFeedback(FeedbackBo feedbackBo);
 
 	Mono<FeedbackBo> getFeedback(String id);
+
+	Mono<FeedbackBo> finalizeFeedback(FeedbackBo feedbackBo);
 
 	Flux<FeedbackBo> getInitializedFeedbacksForActor(String actorId, int page, int size);
 

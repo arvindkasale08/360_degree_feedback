@@ -3,9 +3,11 @@ package com.intuit.review.feedback.mgmt.port.http;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import com.intuit.review.feedback.mgmt.port.http.mapper.FeedbackRequestDtoLightBoMapper;
+import com.intuit.review.feedback.mgmt.port.http.mapper.FinalizeFeedbackRequestLightBoMapper;
+import com.intuit.review.feedback.mgmt.port.http.mapper.InitializeFeedbackRequestLightBoMapper;
 import com.intuit.review.feedback.mgmt.port.http.mapper.FeedbackResponseDtoBoMapper;
 import com.intuit.review.feedback.mgmt.port.http.model.FeedbackListResponseDTO;
+import com.intuit.review.feedback.mgmt.port.http.model.FinalizeFeedbackRequestDTO;
 import com.intuit.review.feedback.mgmt.port.http.model.InitializeFeedbackRequestDTO;
 import com.intuit.review.feedback.mgmt.port.http.model.FeedbackResponseDTO;
 import com.intuit.review.feedback.mgmt.port.http.model.PaginationInfoDTO;
@@ -17,14 +19,23 @@ import reactor.core.publisher.Mono;
 public class FeedbackHandler {
 
 	private final FeedbackUC feedbackUC;
-	private final FeedbackRequestDtoLightBoMapper requestDtoLightBoMapper;
+	private final InitializeFeedbackRequestLightBoMapper initializeFeedbackRequestLightBoMapper;
+	private final FinalizeFeedbackRequestLightBoMapper finalizeFeedbackRequestLightBoMapper;
 	private final FeedbackResponseDtoBoMapper responseDtoBoMapper;
 
 	public Mono<FeedbackResponseDTO> handleInitialize(InitializeFeedbackRequestDTO requestDTO) {
 		log.info("FeedbackRequestHandler:: initializing feedback with actorId={}, requestorId={}, subjectId={}", requestDTO.getActorId(), requestDTO.getRequestorId(), requestDTO.getSubjectId());
 
-		return Mono.just(requestDtoLightBoMapper.mapDtoToBo(requestDTO))
+		return Mono.just(initializeFeedbackRequestLightBoMapper.mapDtoToBo(requestDTO))
 			.flatMap(feedbackUC::initializeFeedback)
+			.map(responseDtoBoMapper::mapBoToDto);
+	}
+
+	public Mono<FeedbackResponseDTO> handleFinalize(String feedbackId, FinalizeFeedbackRequestDTO requestDTO) {
+		log.info("FeedbackRequestHandler:: finalizing feedback");
+
+		return Mono.just(finalizeFeedbackRequestLightBoMapper.mapDtoToBo(requestDTO))
+			.flatMap(lightBo -> feedbackUC.finalizeFeedback(feedbackId, lightBo))
 			.map(responseDtoBoMapper::mapBoToDto);
 	}
 

@@ -4,7 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.intuit.review.feedback.mgmt.port.http.FeedbackHandler;
-import com.intuit.review.feedback.mgmt.port.http.mapper.FeedbackRequestDtoLightBoMapper;
+import com.intuit.review.feedback.mgmt.port.http.mapper.FinalizeFeedbackRequestLightBoMapper;
+import com.intuit.review.feedback.mgmt.port.http.mapper.InitializeFeedbackRequestLightBoMapper;
 import com.intuit.review.feedback.mgmt.port.http.mapper.FeedbackResponseDtoBoMapper;
 import com.intuit.review.feedback.mgmt.port.mongo.mapper.FeedbackRequestBoEntityMapper;
 import com.intuit.review.feedback.mgmt.port.mongo.repository.FeedbackMongoRepository;
@@ -19,8 +20,14 @@ public class AdaptersConfiguration {
 
 	// mappers
 	@Bean
-	public FeedbackRequestDtoLightBoMapper feedbackRequestDtoLightBoMapper(MapperFacade mapperFacade, MapperFactory mapperFactory) {
-		FeedbackRequestDtoLightBoMapper mapper = new FeedbackRequestDtoLightBoMapper(mapperFacade);
+	public InitializeFeedbackRequestLightBoMapper initializeFeedbackRequestDtoLightBoMapper(MapperFacade mapperFacade, MapperFactory mapperFactory) {
+		InitializeFeedbackRequestLightBoMapper mapper = new InitializeFeedbackRequestLightBoMapper(mapperFacade);
+		return mapper;
+	}
+
+	@Bean
+	public FinalizeFeedbackRequestLightBoMapper finalizeFeedbackRequestDtoLightBoMapper(MapperFacade mapperFacade, MapperFactory mapperFactory) {
+		FinalizeFeedbackRequestLightBoMapper mapper = new FinalizeFeedbackRequestLightBoMapper(mapperFacade);
 		return mapper;
 	}
 
@@ -32,8 +39,8 @@ public class AdaptersConfiguration {
 
 	// handlers
 	@Bean
-	public FeedbackHandler feedbackRequestHandler(FeedbackUC feedbackUC, FeedbackRequestDtoLightBoMapper lightBoMapper, FeedbackResponseDtoBoMapper responseDtoBoMapper) {
-		return new FeedbackHandler(feedbackUC, lightBoMapper, responseDtoBoMapper);
+	public FeedbackHandler feedbackRequestHandler(FeedbackUC feedbackUC, InitializeFeedbackRequestLightBoMapper lightBoMapper, FinalizeFeedbackRequestLightBoMapper finalizeFeedbackRequestLightBoMapper, FeedbackResponseDtoBoMapper responseDtoBoMapper) {
+		return new FeedbackHandler(feedbackUC, lightBoMapper, finalizeFeedbackRequestLightBoMapper, responseDtoBoMapper);
 	}
 
 

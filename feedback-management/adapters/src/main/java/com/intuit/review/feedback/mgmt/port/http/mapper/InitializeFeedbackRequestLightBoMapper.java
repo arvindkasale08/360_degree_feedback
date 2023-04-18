@@ -9,7 +9,7 @@ import ma.glasnost.orika.MapperFacade;
 
 @Slf4j
 @RequiredArgsConstructor
-public class FeedbackRequestDtoLightBoMapper {
+public class InitializeFeedbackRequestLightBoMapper {
 
 	private final MapperFacade mapperFacade;
 
