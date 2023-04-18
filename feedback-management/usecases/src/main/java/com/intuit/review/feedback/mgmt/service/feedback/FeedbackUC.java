@@ -69,7 +69,7 @@ public class FeedbackUC {
 		return feedbackRepository.getFeedback(id)
 			// Only initialized feedbacks can be finalized
 			.filter(feedbackBo -> feedbackBo.getStatus() == FeedbackStatus.INITIALIZED)
-			.switchIfEmpty(Mono.error(new FeedbackNotFoundException(ErrorBo.builder().code(ErrorConstants.APPLICATION_NOT_FOUND).status(404)
+			.switchIfEmpty(Mono.error(new FeedbackNotFoundException(ErrorBo.builder().code(ErrorConstants.FEEDBACK_NOT_FOUND).status(404)
 				.message("Feedback with id=".concat(id).concat(" does not exist")).build()
 			)))
 			// get the data
@@ -99,7 +99,7 @@ public class FeedbackUC {
 		// find the feedback in the database
 		return feedbackRepository.getFeedback(id)
 			// if not found return exception
-			.switchIfEmpty(Mono.error(new FeedbackNotFoundException(ErrorBo.builder().code(ErrorConstants.APPLICATION_NOT_FOUND).status(404)
+			.switchIfEmpty(Mono.error(new FeedbackNotFoundException(ErrorBo.builder().code(ErrorConstants.FEEDBACK_NOT_FOUND).status(404)
 				.message("Feedback with id=".concat(id).concat(" does not exist")).build()
 			)))
 			.doOnError(error -> {
