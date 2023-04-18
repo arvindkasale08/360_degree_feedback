@@ -36,7 +36,7 @@ public final class ExceptionHandlerControllerAdvice {
 	@ExceptionHandler({UserNotFoundException.class})
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	ResponseEntity<ErrorDTO> handleUserNotFound(ResourceNotFoundException ex) {
-		log.info("Creating FeedbackNotFoundException response with not found status. " + ex.getErrorBo().getMessage());
+		log.info("Creating UserNotFoundException response with not found status. " + ex.getErrorBo().getMessage());
 
 		ErrorDTO errorDto = errorDtoBoMapper.getBoToDtoMapper().apply(ex.getErrorBo());
 		errorDto.setStatus(HttpStatus.NOT_FOUND.value());

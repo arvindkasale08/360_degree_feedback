@@ -1,0 +1,41 @@
+[
+  {
+    "externalId": "ext-1",
+    "username": "dummy.user",
+    "managerId": "",
+    "profile": {
+      "firstName": "John",
+      "lastName": "Doe Manager",
+      "email": "jd@gmail.com",
+      "businessUnit": "Accounting",
+      "designation": "Manager"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "ext-2",
+    "username": "sales.user",
+    "managerId": "ext-1",
+    "profile": {
+      "firstName": "Sales ",
+      "lastName": "Person",
+      "email": "sp@gmail.com",
+      "businessUnit": "Accounting",
+      "designation": "Sales"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "ext-3",
+    "username": "marketing.user",
+    "managerId": "ext-1",
+    "profile": {
+      "firstName": "Marketing",
+      "lastName": "Person",
+      "email": "mp@gmail.com",
+      "businessUnit": "Accounting",
+      "designation": "Marketing"
+    },
+    "status": "ACTIVE"
+  }
+]

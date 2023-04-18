@@ -44,7 +44,7 @@ public class MapperConfiguration {
 
 	@Bean
 	public UserBoEntityMapper userBoEntityMapper(MapperFacade mapperFacade, MapperFactory mapperFactory) {
-		UserBoEntityMapper mapper = new UserBoEntityMapper();
+		UserBoEntityMapper mapper = new UserBoEntityMapper(mapperFacade);
 		return mapper;
 	}
 

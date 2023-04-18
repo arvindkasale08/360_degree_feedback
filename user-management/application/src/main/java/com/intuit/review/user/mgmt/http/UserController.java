@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.intuit.review.user.mgmt.port.http.UserHandler;
+import com.intuit.review.user.mgmt.port.http.model.UserListResponseDTO;
 import com.intuit.review.user.mgmt.port.http.model.UserResponseDTO;
 import reactor.core.publisher.Mono;
 
@@ -30,9 +31,9 @@ public class UserController {
 			.map(userResponseDto -> new ResponseEntity<>(userResponseDto, HttpStatus.OK));
 	}
 
-	@RequestMapping(value = "/users/{externalId}/directReporting", method = RequestMethod.GET)
-	public Mono<ResponseEntity<UserResponseDTO>> getDirectReportingForManager(@Valid @PathVariable("externalId") String externalId) {
-		return userHandler.handleGetByExternalId(externalId)
+	@RequestMapping(value = "{externalId}/directReporting", method = RequestMethod.GET)
+	public Mono<ResponseEntity<UserListResponseDTO>> getDirectReportingForManager(@Valid @PathVariable("externalId") String externalId) {
+		return userHandler.getDirectReportingForManager(externalId)
 			.map(userResponseDto -> new ResponseEntity<>(userResponseDto, HttpStatus.OK));
 	}
 }

@@ -30,7 +30,7 @@ public class UserUC {
 			.doOnError(error -> {
 				if (!(error instanceof UserNotFoundException)) {
 					ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
-						.message("Error getting feedback")
+						.message("Error getting user")
 						.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
 							.message(error.getMessage()).build()))
 						.build();
