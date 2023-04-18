@@ -26,7 +26,7 @@ paths:
 
       responses:
         200:
-          description: Designation fetched successfully
+          description: User fetched successfully
           schema:
             $ref: '#/definitions/UserResponse'
         400:
@@ -42,7 +42,42 @@ paths:
           schema:
             $ref: '#/definitions/Error'
         500:
-          description: Internal error while fetching designation
+          description: Internal error while fetching User
+          schema:
+            $ref: '#/definitions/Error'
+
+  /users/{externalId}/directReporting:
+    get:
+      tags:
+        - accountManagementService
+      description: Returns a List of Subordinate Users
+      operationId: getDirectReporting
+      parameters:
+        - name: externalId
+          in: path
+          description: externalId of the user for whom to fetch direct reportings
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: User's direct reportings fetched successfully
+          schema:
+            $ref: '#/definitions/UserResponse'
+        400:
+          description: Error while validating the request
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal error while fetching user's direct reportings
           schema:
             $ref: '#/definitions/Error'
 
@@ -188,13 +223,13 @@ paths:
             $ref: '#/definitions/Error'
 
 definitions:
-  SecurityProtocol:
-    type: string
-    enum: &SecurityProtocol
-      - OAUTH2
-      - OIDC
-      - WS_SECURITY
-      - CYCLR
+  UserListResponse:
+    type: object
+    properties:
+      users:
+        type: array
+        items:
+          $ref: '#/definitions/UserResponse'
 
   DesignationResponse:
     type: object
@@ -220,6 +255,42 @@ definitions:
         type: string
       code:
         type: string
+
+  UserResponse:
+    type: object
+    properties:
+      id:
+        type: string
+      externalId:
+        type: string
+      username:
+        type: string
+      managerId:
+        type: string
+      status:
+        $ref: '#/definitions/UserStatus'
+      profile:
+        $ref: '#/definitions/Profile'
+
+  Profile:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      businessUnit:
+        type: string
+      designation:
+        type: string
+
+  UserStatus:
+    type: string
+    enum: &FeedbackStatus
+      - ACTIVE
+      - EXPIRED
 
   Error:
     type: object
