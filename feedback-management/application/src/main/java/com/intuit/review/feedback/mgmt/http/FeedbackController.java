@@ -56,6 +56,13 @@ public class FeedbackController {
 			.map(responseDto -> new ResponseEntity<>(responseDto, HttpStatus.OK));
 	}
 
+	@RequestMapping(value = "directReporting/{id}", method = RequestMethod.GET)
+	public Mono<ResponseEntity<FeedbackListResponseDTO>> getMyReportingsFeedbacks(@Valid @PathVariable("id") String id, @RequestParam(value = "page", required = true, defaultValue = "1") Integer page, @RequestParam(value = "size", required = false, defaultValue = "10") Integer size) {
+		Integer pageSize = getPageSize(size);
+		return feedbackHandler.getDirectReportingFeedback(id, page, pageSize)
+			.map(responseDto -> new ResponseEntity<>(responseDto, HttpStatus.OK));
+	}
+
 	private Integer getPageSize(Integer size) {
 		if (size <= 0) {
 			return DEFAULT_PAGE_SIZE;

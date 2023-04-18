@@ -1,6 +1,7 @@
 package com.intuit.review.feedback.mgmt.port.mongo.repository;
 
 import java.util.Arrays;
+import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -94,6 +95,36 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
 				log.error("Exception while counting getCountOfMyFeedbacks", throwable);
 				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
 					.message("Exception while counting getCountOfMyFeedbacks")
+					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+						.message(throwable.getMessage()).build()))
+					.build();
+				throw new ServiceException(errorBo);
+			});
+	}
+
+	@Override
+	public Flux<FeedbackBo> getDirectReportingFeedbacks(List<String> subjectIds, int page, int size) {
+		log.info("Getting all feedbacks for subjectId={}", subjectIds);
+		return repository.findAllByStatusIsAndSubject_IdIn(FeedbackStatus.FINALIZED, subjectIds, PageRequest.of(page - 1, size))
+			.doOnError(throwable -> {
+				log.error("Cannot get feedbacks", throwable);
+				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+					.message("Cannot get feedbacks")
+					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+						.message(throwable.getMessage()).build()))
+					.build();
+				throw new ServiceException(errorBo);
+			})
+			.map(mapper::mapEntityToBo);
+	}
+
+	@Override
+	public Mono<Long> getCountOfDirectReportingFeedbacks(List<String> subjectIds) {
+		return repository.countByStatusAndSubject_IdIn(FeedbackStatus.FINALIZED, subjectIds)
+			.doOnError(throwable -> {
+				log.error("Exception while counting getCountOfDirectReportingFeedbacks", throwable);
+				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+					.message("Exception while counting getCountOfDirectReportingFeedbacks")
 					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
 						.message(throwable.getMessage()).build()))
 					.build();

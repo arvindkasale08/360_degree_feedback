@@ -1,5 +1,7 @@
 package com.intuit.review.feedback.mgmt.service.port.mongo;
 
+import java.util.List;
+
 import com.intuit.review.feedback.mgmt.domain.bo.feedback.FeedbackBo;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -14,7 +16,11 @@ public interface FeedbackRepository {
 
 	Mono<Long> getCountOfInitializedFeedbacksForActor(String actorId);
 
-	Flux<FeedbackBo> getMyFeedbacks(String actorId, int page, int size);
+	Flux<FeedbackBo> getMyFeedbacks(String subjectId, int page, int size);
 
-	Mono<Long> getCountOfMyFeedbacks(String actorId);
+	Mono<Long> getCountOfMyFeedbacks(String subjectId);
+
+	Flux<FeedbackBo> getDirectReportingFeedbacks(List<String> subjectIds, int page, int size);
+
+	Mono<Long> getCountOfDirectReportingFeedbacks(List<String> subjectIds);
 }

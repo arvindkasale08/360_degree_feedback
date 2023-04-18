@@ -150,6 +150,47 @@ public class FeedbackUC {
 			});
 	}
 
+	public Flux<FeedbackBo> getDirectReportingFeedback(String managerId, int page, int size) {
+		if (page <= 0) {
+			return Flux.error(new PaginationException(ErrorBo.builder().code(ErrorConstants.PAGINATION_ERROR).status(500)
+				.message("Invalid Page number").build()));
+		}
+
+		return userService.getDirectReporting(managerId)
+			.map(feedbackUserBo -> feedbackUserBo.getId())
+			.collectList()
+			.flatMapMany(strings -> {
+				return feedbackRepository
+					.getDirectReportingFeedbacks(strings, page, size)
+					.doOnError(error -> {
+						ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+							.message("Error while fetching initialized feedbacks for subject ids")
+							.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+								.message(error.getMessage())
+								.build())).build();
+						throw new ServiceException(errorBo);
+					});
+			});
+	}
+
+	public Mono<Long> getCountOfDirectReportingFeedback(String managerId) {
+		return userService.getDirectReporting(managerId)
+			.map(feedbackUserBo -> feedbackUserBo.getId())
+			.collectList()
+			.flatMap(subjectIds -> {
+				return feedbackRepository
+					.getCountOfDirectReportingFeedbacks(subjectIds)
+					.doOnError(error -> {
+						ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+							.message("Error while fetching number of feedbacks")
+							.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+								.message(error.getMessage())
+								.build())).build();
+						throw new ServiceException(errorBo);
+					});
+			});
+	}
+
 	private long getValidUntilTime() {
 		return Instant.now().toEpochMilli() + CommonConstant.EXPIRY;
 	}

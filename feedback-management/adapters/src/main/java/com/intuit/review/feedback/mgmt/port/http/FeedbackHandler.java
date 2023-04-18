@@ -69,4 +69,22 @@ public class FeedbackHandler {
 				}
 			);
 	}
+
+	public Mono<FeedbackListResponseDTO> getDirectReportingFeedback(String managerId, int page, int pageSize) {
+		return feedbackUC.getDirectReportingFeedback(managerId, page, pageSize)
+			.map(responseDtoBoMapper::mapBoToDto)
+			.collectList()
+			// merge the result together
+			.zipWith(feedbackUC.getCountOfDirectReportingFeedback(managerId), (feedbacks, count) -> {
+					PaginationInfoDTO pageInfo = new PaginationInfoDTO();
+					pageInfo.currentPage(page);
+					pageInfo.size(count.intValue());
+					pageInfo.totalPages((int) Math.ceil((double) count / pageSize));
+					FeedbackListResponseDTO res = new FeedbackListResponseDTO();
+					res.feedbacks(feedbacks);
+					res.paginationInfo(pageInfo);
+					return res;
+				}
+			);
+	}
 }
