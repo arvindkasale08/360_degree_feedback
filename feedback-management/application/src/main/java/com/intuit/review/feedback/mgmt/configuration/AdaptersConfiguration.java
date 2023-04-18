@@ -7,6 +7,7 @@ import com.intuit.review.feedback.mgmt.port.http.FeedbackHandler;
 import com.intuit.review.feedback.mgmt.port.http.mapper.FinalizeFeedbackRequestLightBoMapper;
 import com.intuit.review.feedback.mgmt.port.http.mapper.InitializeFeedbackRequestLightBoMapper;
 import com.intuit.review.feedback.mgmt.port.http.mapper.FeedbackResponseDtoBoMapper;
+import com.intuit.review.feedback.mgmt.port.http.mapper.UserResponseDTOtoFeedbackUserBoMapper;
 import com.intuit.review.feedback.mgmt.port.mongo.mapper.FeedbackRequestBoEntityMapper;
 import com.intuit.review.feedback.mgmt.port.mongo.repository.FeedbackMongoRepository;
 import com.intuit.review.feedback.mgmt.port.mongo.repository.FeedbackRepositoryImpl;
@@ -34,6 +35,13 @@ public class AdaptersConfiguration {
 	@Bean
 	public FeedbackResponseDtoBoMapper feedbackResponseDtoBoMapper(MapperFacade mapperFacade, MapperFactory mapperFactory) {
 		FeedbackResponseDtoBoMapper mapper = new FeedbackResponseDtoBoMapper(mapperFacade);
+		return mapper;
+	}
+
+	@Bean
+	public UserResponseDTOtoFeedbackUserBoMapper userResponseDTOtoFeedbackUserBoMapper(MapperFacade mapperFacade, MapperFactory mapperFactory) {
+		UserResponseDTOtoFeedbackUserBoMapper mapper = new UserResponseDTOtoFeedbackUserBoMapper(mapperFacade);
+		mapper.configure(mapperFactory);
 		return mapper;
 	}
 

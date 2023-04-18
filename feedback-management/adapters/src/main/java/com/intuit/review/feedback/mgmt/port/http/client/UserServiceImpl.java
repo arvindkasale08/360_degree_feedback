@@ -15,25 +15,21 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-	private UserClient userClient;
-	private UserResponseDTOtoFeedbackUserBoMapper mapper;
+	private final UserClient userClient;
+	private final UserResponseDTOtoFeedbackUserBoMapper mapper;
 
 	@Override
 	public Mono<FeedbackUserBo> getUser(String externalId) {
-		// TODO : Update with real implementation
+		log.info("Calling user service to get user for externalId={}", externalId);
 		return userClient.getUserByExternalId(externalId)
-			.map(mapper);
+			.map(mapper::mapDtoToBo);
 	}
 
 	@Override
 	public Flux<FeedbackUserBo> getDirectReporting(String managerId) {
-		return Flux.fromIterable(
-			Arrays.asList(FeedbackUserBo.builder()
-				.email("dummy-email.com")
-				.firstName("John")
-				.lastName("Doe")
-				.id("123456")
-				.build())
-		);
+		log.info("Calling user service to get all direct reportings for managerId={}", managerId);
+		return userClient.getDirectReportingByManagerId(managerId)
+			.flatMapMany(userListResponseDTO -> Flux.fromIterable(userListResponseDTO.getUsers()))
+			.map(mapper::mapDtoToBo);
 	}
 }

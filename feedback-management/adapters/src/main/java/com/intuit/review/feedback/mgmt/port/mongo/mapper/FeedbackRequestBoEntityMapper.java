@@ -27,10 +27,10 @@ public class FeedbackRequestBoEntityMapper implements OrikaMapperFactoryConfigur
 						bo.setSubject(feedbackUserBoEntityMapper.mapEntityToBo(entity.getSubject()));
 					}
 					if (entity.getActor() != null) {
-						bo.setSubject(feedbackUserBoEntityMapper.mapEntityToBo(entity.getActor()));
+						bo.setActor(feedbackUserBoEntityMapper.mapEntityToBo(entity.getActor()));
 					}
 					if (entity.getRequestor() != null) {
-						bo.setSubject(feedbackUserBoEntityMapper.mapEntityToBo(entity.getRequestor()));
+						bo.setRequestor(feedbackUserBoEntityMapper.mapEntityToBo(entity.getRequestor()));
 					}
 				}
 
@@ -41,10 +41,10 @@ public class FeedbackRequestBoEntityMapper implements OrikaMapperFactoryConfigur
 						entity.setSubject(feedbackUserBoEntityMapper.mapBoToEntity(bo.getSubject()));
 					}
 					if (bo.getActor() != null) {
-						entity.setSubject(feedbackUserBoEntityMapper.mapBoToEntity(bo.getActor()));
+						entity.setActor(feedbackUserBoEntityMapper.mapBoToEntity(bo.getActor()));
 					}
 					if (bo.getRequestor() != null) {
-						entity.setSubject(feedbackUserBoEntityMapper.mapBoToEntity(bo.getRequestor()));
+						entity.setRequestor(feedbackUserBoEntityMapper.mapBoToEntity(bo.getRequestor()));
 					}
 				}
 			})

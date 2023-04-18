@@ -12,7 +12,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.intuit.review.feedback.mgmt.port.http.client.UserClient;
+import com.intuit.review.feedback.mgmt.port.http.client.UserClientImpl;
 import com.intuit.review.feedback.mgmt.port.http.client.UserServiceImpl;
+import com.intuit.review.feedback.mgmt.port.http.mapper.UserResponseDTOtoFeedbackUserBoMapper;
 import com.intuit.review.feedback.mgmt.service.port.http.UserService;
 
 @Slf4j
@@ -22,8 +25,13 @@ public class ApiServiceConfig {
 
 	// Client Configurations
 	@Bean
-	public UserService userService() {
-		return new UserServiceImpl();
+	public UserClient userClient(WebClient webClient) {
+		return new UserClientImpl(webClient);
+	}
+
+	@Bean
+	public UserService userService(UserClient userClient, UserResponseDTOtoFeedbackUserBoMapper mapper) {
+		return new UserServiceImpl(userClient, mapper);
 	}
 
 	@Bean
