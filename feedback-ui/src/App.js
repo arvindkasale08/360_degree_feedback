@@ -1,9 +1,12 @@
+import Error from "./components/Error";
+import { Routes, Route } from 'react-router-dom';
+
 
 function App() {
   return (
-    <main className="App">
-      
-    </main>
+    <Routes>
+      <Route path="*" element={<Error />} />
+    </Routes>
   );
 }
 
