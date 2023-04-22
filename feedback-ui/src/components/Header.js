@@ -10,24 +10,24 @@ const Header = () => {
 
                         </b>
                         <span className="logo-text">
-                            <span className="dark-logo">360 Feedback</span>
+                            <span className="dark-logo">360 FEEDBACK</span>
 
                         </span>
                     </a>
                     <a className="nav-toggler waves-effect waves-light text-white d-block d-md-none"
-                        href="javascript:void(0)"><i className="ti-menu ti-close"></i></a>
+                        href=""><i className="ti-menu ti-close"></i></a>
                 </div>
                 <div className="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <ul className="navbar-nav d-lg-none d-md-block ">
                         <li className="nav-item">
                             <a className="nav-toggler nav-link waves-effect waves-light text-white "
-                                href="javascript:void(0)"><i className="ti-menu ti-close"></i></a>
+                                href=""><i className="ti-menu ti-close"></i></a>
                         </li>
                     </ul>
                     <ul className="navbar-nav me-auto mt-md-0 ">
 
                         <li className="nav-item search-box">
-                            <a className="nav-link text-muted" href="javascript:void(0)"><i className="ti-search"></i></a>
+                            <a className="nav-link text-muted" href=""><i className="ti-search"></i></a>
                         </li>
                     </ul>
                     <ul className="navbar-nav">
