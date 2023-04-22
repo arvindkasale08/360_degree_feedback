@@ -32,13 +32,30 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
+	public Flux<UserBo> getAllUsers() {
+		log.info("Fetching all active users from database");
+		return repository.findAll()
+			.filter(user -> user.getStatus() == UserStatus.ACTIVE)
+			.doOnError(throwable -> {
+				log.error("Cannot get all active users", throwable);
+				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+					.message("Cannot get all active users")
+					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+						.message(throwable.getMessage()).build()))
+					.build();
+				throw new ServiceException(errorBo);
+			})
+			.map(mapper::mapEntityToBo);
+	}
+
+	@Override
 	public Flux<UserBo> getDirectReportingForManager(String managerId) {
 		log.info("Getting all direct reporings for managerId={}", managerId);
 		return repository.findAllByManagerIdIs(managerId)
 			.doOnError(throwable -> {
-				log.error("Cannot get initialized feedbacks", throwable);
+				log.error("Cannot get reporting for manager", throwable);
 				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
-					.message("Cannot get initialized feedbacks")
+					.message("Cannot get reporting for managers")
 					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
 						.message(throwable.getMessage()).build()))
 					.build();

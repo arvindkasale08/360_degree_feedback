@@ -22,6 +22,17 @@ public class UserHandler {
 			.map(responseDtoBoMapper::mapBoToDto);
 	}
 
+	public Mono<UserListResponseDTO> handleGetAll() {
+		return userUC.getAllUsers()
+			.map(responseDtoBoMapper::mapBoToDto)
+			.collectList()
+			.map(users -> {
+				UserListResponseDTO responseDTO = new UserListResponseDTO();
+				responseDTO.users(users);
+				return responseDTO;
+			});
+	}
+
 	public Mono<UserListResponseDTO> getDirectReportingForManager(String managerId) {
 		return userUC.getDirectReportingForManager(managerId)
 			.map(responseDtoBoMapper::mapBoToDto)

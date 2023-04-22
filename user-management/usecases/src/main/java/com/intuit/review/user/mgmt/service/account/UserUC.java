@@ -39,6 +39,19 @@ public class UserUC {
 			});
 	}
 
+	public Flux<UserBo> getAllUsers() {
+		return userRepository
+			.getAllUsers()
+			.doOnError(error -> {
+				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+					.message("Error while fetching all users")
+					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+						.message(error.getMessage())
+						.build())).build();
+				throw new ServiceException(errorBo);
+			});
+	}
+
 	public Flux<UserBo> getDirectReportingForManager(String managerId) {
 
 		return userRepository

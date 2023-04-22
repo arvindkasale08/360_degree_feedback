@@ -8,5 +8,7 @@ public interface UserRepository {
 
 	Mono<UserBo> getUserByExternalId(String externalId);
 
+	Flux<UserBo> getAllUsers();
+
 	Flux<UserBo> getDirectReportingForManager(String managerId);
 }

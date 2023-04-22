@@ -31,9 +31,15 @@ public class UserController {
 			.map(userResponseDto -> new ResponseEntity<>(userResponseDto, HttpStatus.OK));
 	}
 
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public Mono<ResponseEntity<UserListResponseDTO>> getAllUsers() {
+		return userHandler.handleGetAll()
+			.map(userListResponseDTO -> new ResponseEntity<>(userListResponseDTO, HttpStatus.OK));
+	}
+
 	@RequestMapping(value = "{externalId}/directReporting", method = RequestMethod.GET)
 	public Mono<ResponseEntity<UserListResponseDTO>> getDirectReportingForManager(@Valid @PathVariable("externalId") String externalId) {
 		return userHandler.getDirectReportingForManager(externalId)
-			.map(userResponseDto -> new ResponseEntity<>(userResponseDto, HttpStatus.OK));
+			.map(userListResponseDTO -> new ResponseEntity<>(userListResponseDTO, HttpStatus.OK));
 	}
 }

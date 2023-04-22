@@ -1,40 +1,157 @@
 [
   {
-    "externalId": "ext-1",
-    "username": "dummy.user",
+    "externalId": "a267db4e-c5cc-4656-abda-03b130cb45c6",
+    "username": "sanjay.arora",
     "managerId": "",
     "profile": {
-      "firstName": "John",
-      "lastName": "Doe Manager",
-      "email": "jd@gmail.com",
-      "businessUnit": "Accounting",
-      "designation": "Manager"
+      "firstName": "Sanjay",
+      "lastName": "Arora",
+      "email": "sanjay.arora@gmail.com",
+      "businessUnit": "Development Center India",
+      "designation": "VP"
     },
     "status": "ACTIVE"
   },
   {
-    "externalId": "ext-2",
-    "username": "sales.user",
-    "managerId": "ext-1",
+    "externalId": "fff6a5e1-d52a-4b79-9908-2e227f2a4261",
+    "username": "umesh.wadhwani",
+    "managerId": "a267db4e-c5cc-4656-abda-03b130cb45c6",
     "profile": {
-      "firstName": "Sales ",
-      "lastName": "Person",
-      "email": "sp@gmail.com",
-      "businessUnit": "Accounting",
-      "designation": "Sales"
+      "firstName": "Umesh",
+      "lastName": "Wadhwani",
+      "email": "umesh.wadhwani@gmail.com",
+      "businessUnit": "Core Engineering",
+      "designation": "Senior Manager"
     },
     "status": "ACTIVE"
   },
   {
-    "externalId": "ext-3",
-    "username": "marketing.user",
-    "managerId": "ext-1",
+    "externalId": "fc9d77e4-37a6-42e9-af0f-207884a2b1a7",
+    "username": "sandhya.mohite",
+    "managerId": "a267db4e-c5cc-4656-abda-03b130cb45c6",
     "profile": {
-      "firstName": "Marketing",
-      "lastName": "Person",
-      "email": "mp@gmail.com",
-      "businessUnit": "Accounting",
-      "designation": "Marketing"
+      "firstName": "Sandhya",
+      "lastName": "Mohite",
+      "email": "sandhya.mohite@gmail.com",
+      "businessUnit": "Professional Services",
+      "designation": "Senior Manager"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "ffed3dc5-e9df-407e-aebb-62e827153e6a",
+    "username": "arvind.kasale",
+    "managerId": "fff6a5e1-d52a-4b79-9908-2e227f2a4261",
+    "profile": {
+      "firstName": "Arvind",
+      "lastName": "Kasale",
+      "email": "arvind.kasale@gmail.com",
+      "businessUnit": "Core Engineering",
+      "designation": "Staff Software Developer"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "1d273f53-3dab-4242-a7b9-6bd9377cf5ed",
+    "username": "anuja.deshpande",
+    "managerId": "fff6a5e1-d52a-4b79-9908-2e227f2a4261",
+    "profile": {
+      "firstName": "Anuja",
+      "lastName": "Deshpande",
+      "email": "anuja.deshpande@gmail.com",
+      "businessUnit": "Core Engineering",
+      "designation": "Senior Software Developer"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "08a43610-3044-4b0c-a194-4608493a0242",
+    "username": "arpit.jain",
+    "managerId": "fff6a5e1-d52a-4b79-9908-2e227f2a4261",
+    "profile": {
+      "firstName": "Arpit",
+      "lastName": "Jain",
+      "email": "arpit.jain@gmail.com",
+      "businessUnit": "Core Engineering",
+      "designation": "Software Developer"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "3a300e46-5b09-4d10-af02-96beec9ba586",
+    "username": "ankit.bhatt",
+    "managerId": "fff6a5e1-d52a-4b79-9908-2e227f2a4261",
+    "profile": {
+      "firstName": "Ankit",
+      "lastName": "Bhatt",
+      "email": "arpit.jain@gmail.com",
+      "businessUnit": "Core Engineering",
+      "designation": "Staff Software Developer"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "45818059-3ccc-4cdf-b757-4ca8b37a5c5d",
+    "username": "gaurav.kumar",
+    "managerId": "fff6a5e1-d52a-4b79-9908-2e227f2a4261",
+    "profile": {
+      "firstName": "Gaurav",
+      "lastName": "Kumar",
+      "email": "gaurav.kumar@gmail.com",
+      "businessUnit": "Core Engineering",
+      "designation": "Staff Software Developer"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "28306a93-2951-4457-94a9-2cc51235e0f6",
+    "username": "ayushi.pathak",
+    "managerId": "fc9d77e4-37a6-42e9-af0f-207884a2b1a7",
+    "profile": {
+      "firstName": "Ayushi",
+      "lastName": "Pathak",
+      "email": "ayushi.pathak@gmail.com",
+      "businessUnit": "Professional Service",
+      "designation": "Associate Software Developer"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "592ef90c-ba76-4e79-aa69-2561b80a5b0a",
+    "username": "arun.bhatt",
+    "managerId": "fc9d77e4-37a6-42e9-af0f-207884a2b1a7",
+    "profile": {
+      "firstName": "Arun",
+      "lastName": "Bhatt",
+      "email": "arun.bhatt@gmail.com",
+      "businessUnit": "Professional Service",
+      "designation": "Software Developer"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "34a5b494-7bdd-411b-a369-c98993b3c1cc",
+    "username": "tejal.katore",
+    "managerId": "fc9d77e4-37a6-42e9-af0f-207884a2b1a7",
+    "profile": {
+      "firstName": "Tejal",
+      "lastName": "Katore",
+      "email": "tejal.katore@gmail.com",
+      "businessUnit": "Professional Service",
+      "designation": "Software Testing Engineer"
+    },
+    "status": "ACTIVE"
+  },
+  {
+    "externalId": "1ebd9a62-cf43-4f68-8957-7a9909112eee",
+    "username": "majoj.dalvi",
+    "managerId": "fc9d77e4-37a6-42e9-af0f-207884a2b1a7",
+    "profile": {
+      "firstName": "Manoj",
+      "lastName": "Dalvi",
+      "email": "manoj.dalvi@gmail.com",
+      "businessUnit": "Professional Service",
+      "designation": "Software Testing Engineer"
     },
     "status": "ACTIVE"
   }
