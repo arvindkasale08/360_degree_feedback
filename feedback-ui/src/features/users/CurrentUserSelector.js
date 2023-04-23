@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux'
-import { selectAllUsers } from './usersSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectAllUsers, addCurrentUser } from './usersSlice'
 
 const CurrentUserSelector = () => {
     const users = useSelector(selectAllUsers)
+    const dispatch = useDispatch();
 
     const userOptions = users.map(user => (
         <option key={user.id} value={user.id}>
@@ -10,15 +11,17 @@ const CurrentUserSelector = () => {
         </option>
     ))
 
-    const onUserChange = async (e) => {
-        console.log(e.target.value);
+    const onUserChange = (e) => {
+        const id = e.target.value;
+        const user = users.find(user => user.id === id);
+        dispatch(addCurrentUser(user));
     }
 
     return (
         <ul className="navbar-nav me-auto mt-md-0 ">
             <li className="nav-item search-box">
                 <span className="nav-link text-muted"><i className="ti-search"></i>
-                    <select onChange={onUserChange}>
+                    <select className="header-select" onChange={onUserChange}>
                         <option>Select User</option>
                         {userOptions}
                     </select>

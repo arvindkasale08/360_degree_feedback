@@ -1,5 +1,5 @@
 
-import UserProfile from "../users/UserProfile";
+import RightNav from "../users/RightNav";
 
 const MyFeedbackList = () => {
 
@@ -43,7 +43,7 @@ const MyFeedbackList = () => {
                     </div>
                 </div>
 
-                <UserProfile />
+                <RightNav />
             </div>
         </div>
     )
