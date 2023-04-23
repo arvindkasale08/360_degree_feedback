@@ -9,7 +9,7 @@ const DirectReportingList = () => {
     // get the reportings for a user
     const directReporting = useSelector(getDirectReportings);
     let content;
-    if (currentUser === null) {
+    if (currentUser === null || currentUser === undefined) {
         content = <div className="card">
             <div className="card-body bg-info">
                 <h4 className="text-white card-title">Direct Reportings</h4>
@@ -20,10 +20,10 @@ const DirectReportingList = () => {
         const name = currentUser.profile.firstName + " " + currentUser.profile.lastName;
         const { externalId } = currentUser;
         console.log(directReporting);
-        if (directReporting === null || (directReporting[0] !== undefined && currentUser.externalId != directReporting[0].managerId)) {
+        /*if (directReporting == null || (directReporting[0] !== undefined && currentUser.externalId != directReporting[0].managerId)) {
             console.log("Fetching direct reportings");
             dispatch(fetchDirectReportings(externalId));
-        }
+        }*/
         let innerContent;
 
         if (directReporting == null || directReporting[0] === undefined) {

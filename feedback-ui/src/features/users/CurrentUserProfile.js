@@ -7,7 +7,7 @@ const CurrentUserSelector = () => {
     const currentUser = useSelector(getCurrentUser);
 
     let content;
-    if (currentUser === null) {
+    if (currentUser === null || currentUser === undefined) {
         content = <div className="card-body little-profile text-center">
             <div className="pro-img"><img src="../assets/images/users/4.jpg" alt="user" /></div>
             <h3 className="mb-0">No User Selected</h3>

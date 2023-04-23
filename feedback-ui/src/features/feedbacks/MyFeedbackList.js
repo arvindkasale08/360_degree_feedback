@@ -1,8 +1,40 @@
 
 import RightNav from "../users/RightNav";
+import { useSelector, useDispatch } from "react-redux";
+import { getCurrentUser } from "../users/usersSlice";
+import { selectMyFeedbacks } from "../feedbacks/feedbackSlice";
+import FeedbackExcerpt from "./MyFeedbackExcerpt";
 
 const MyFeedbackList = () => {
 
+    // get the current user from state
+    const currentUser = useSelector(getCurrentUser);
+    const myFeedbacks = useSelector(selectMyFeedbacks);
+    const dispatch = useDispatch();
+    let content;
+    if (currentUser === null || currentUser === undefined) {
+        content = <div className="no-data">
+                <p>No Data Found. Select Different User.</p>
+            </div>
+        
+    } else {
+        const { externalId } = currentUser;
+        const innerContent = myFeedbacks.map(feedback => <FeedbackExcerpt key={feedback.id} feedback={feedback} />);
+        content = <table className="table user-table">
+            <thead>
+                <tr>
+                    <th className="border-top-0">Id</th>
+                    <th className="border-top-0">Requestor</th>
+                    <th className="border-top-0">Actor</th>
+                    <th className="border-top-0">Status</th>
+                    <th className="border-top-0">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                { innerContent }
+            </tbody>
+        </table>
+    }
     return (
         <div className="container-fluid">
             <div className="row">
@@ -11,33 +43,7 @@ const MyFeedbackList = () => {
                         <div className="card-body">
                             <h4 className="card-title">My Feedback</h4>
                             <div className="table-responsive">
-                                <table className="table user-table">
-                                    <thead>
-                                        <tr>
-                                            <th className="border-top-0">#</th>
-                                            <th className="border-top-0">First Name</th>
-                                            <th className="border-top-0">Last Name</th>
-                                            <th className="border-top-0">Username</th>
-                                            <th className="border-top-0">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Deshmukh</td>
-                                            <td>Prohaska</td>
-                                            <td>@Genelia</td>
-                                            <td><a href="">View</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Deshmukh</td>
-                                            <td>Gaylord</td>
-                                            <td>@Ritesh</td>
-                                            <td><a href="">View</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                { content }
                             </div>
                         </div>
                     </div>
