@@ -1,17 +1,17 @@
 import { useSelector } from 'react-redux'
 import { useParams, Link } from 'react-router-dom'
-import { selectFeedbackById } from './feedbackSlice'
+import { selectFeedbackById, selectReportingFeedbackById } from './feedbackSlice'
 import RightNav from '../users/RightNav'
 
-const MyFeedback = () => {
+const ReportingFeedback = () => {
 
     const { feedbackId } = useParams()
     console.log(feedbackId)
 
-    const feedback = useSelector((state) => selectFeedbackById(state, feedbackId));
+    const feedback = useSelector((state) => selectReportingFeedbackById(state, feedbackId));
     console.log(feedback);
 
-    const { requestor, actor } = feedback;
+    const { requestor, subject, actor } = feedback;
 
     return (
         <div className="container-fluid">
@@ -41,6 +41,18 @@ const MyFeedback = () => {
                                         </div>
                                     </div>
                                     <div className="form-group">
+                                        <label className="col-md-12 mb-0">Subject Name</label>
+                                        <div className="col-md-12">
+                                            <span placeholder="Johnathan Doe" className="form-control ps-0 form-control-line">{subject.firstName} {subject.lastName}</span>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="col-md-12 mb-0">Subject Email</label>
+                                        <div className="col-md-12">
+                                            <span placeholder="Johnathan Doe" className="form-control ps-0 form-control-line">{subject.email}</span>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
                                         <label className="col-md-12 mb-0">Actor Name</label>
                                         <div className="col-md-12">
                                             <span placeholder="Johnathan Doe" className="form-control ps-0 form-control-line">{actor.firstName} {actor.lastName}</span>
@@ -60,7 +72,7 @@ const MyFeedback = () => {
                                     </div>
                                     <div className="form-group">
                                         <div className="col-md-12">
-                                            <Link to={`/myFeedback`}>Back to My Feedback</Link>
+                                            <Link to={`/reportingFeedback`}>Back to Direct Reporting Feedback</Link>
                                         </div>
                                     </div>
                                 </form>
@@ -75,4 +87,4 @@ const MyFeedback = () => {
     )
 }
 
-export default MyFeedback;
+export default ReportingFeedback;
