@@ -19,6 +19,21 @@ export const fetchReportingFeedbacks = createAsyncThunk('feedback/directReportin
     return response.data.feedbacks
 })
 
+export const fetchAssignedFeedbacks = createAsyncThunk('feedback/requested', async(id) => {
+    const response = await axios.get(FEEDBACKS_URL + "/assignedToActor/" + id);
+    return response.data.feedbacks
+})
+
+export const finalizeFeedback = createAsyncThunk('feedback/finalize', async({body, id}) => {
+    console.log("In finalize feedback")
+    const data = {
+        "data": body
+    }
+    console.log("data is ", data)
+    const response = await axios.post(FEEDBACKS_URL + "/" + id + "/finalize", data)
+    return response.data
+})
+
 const feedbackSlice = createSlice({
     name: 'feedbacks',
     initialState,
@@ -32,6 +47,19 @@ const feedbackSlice = createSlice({
         .addCase(fetchReportingFeedbacks.fulfilled, (state, action) => {
             state.reportingFeedbacks = action.payload;
         })
+        .addCase(fetchAssignedFeedbacks.fulfilled, (state, action) => {
+            state.assignedFeedbacks = action.payload;
+        })
+        .addCase(finalizeFeedback.fulfilled, (state, action) => {
+            const id = action.payload.id;
+            const assignedFeedbacks = state.assignedFeedbacks;
+            const objWithIdIndex = assignedFeedbacks.findIndex((obj) => obj.id === id);
+
+            if (objWithIdIndex > -1) {
+                assignedFeedbacks.splice(objWithIdIndex, 1);
+            }
+            state.assignedFeedbacks = assignedFeedbacks;
+        })
     }
 })
 
@@ -39,8 +67,12 @@ export const selectMyFeedbacks = (state) => state.feedbacks.myFeedbacks;
 
 export const selectReportingFeedbacks = (state) => state.feedbacks.reportingFeedbacks;
 
+export const selectAssignedFeedbacks = (state) => state.feedbacks.assignedFeedbacks;
+
 export const selectFeedbackById = (state, id) => state.feedbacks.myFeedbacks.find(feedback => feedback.id === id);
 
 export const selectReportingFeedbackById = (state, id) => state.feedbacks.reportingFeedbacks.find(feedback => feedback.id === id);
+
+export const selectAssignedFeedbackById = (state, id) => state.feedbacks.assignedFeedbacks.find(feedback => feedback.id === id);
 
 export default feedbackSlice.reducer

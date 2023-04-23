@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAllUsers, addCurrentUser, fetchDirectReportings } from './usersSlice'
-import { fetchMyFeedbacks, fetchReportingFeedbacks } from "../feedbacks/feedbackSlice";
+import { fetchMyFeedbacks, fetchReportingFeedbacks, fetchAssignedFeedbacks } from "../feedbacks/feedbackSlice";
 
 const CurrentUserSelector = () => {
     const users = useSelector(selectAllUsers)
@@ -18,6 +18,7 @@ const CurrentUserSelector = () => {
         dispatch(addCurrentUser(user));
         dispatch(fetchMyFeedbacks(user.externalId));
         dispatch(fetchReportingFeedbacks(user.externalId));
+        dispatch(fetchAssignedFeedbacks(user.externalId));
         dispatch(fetchDirectReportings(user.externalId));
     }
 

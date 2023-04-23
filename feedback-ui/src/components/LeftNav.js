@@ -15,7 +15,7 @@ const LeftNav = () => {
         myActive = "active"
         requestActive = ""
         reportingActive = ""
-    } else if (pathname.includes("requested")){
+    } else if (pathname.includes("assignedFeedback")){
         myActive = ""
         requestActive = "active"
         reportingActive = ""
@@ -30,9 +30,9 @@ const LeftNav = () => {
                             href="index.html" aria-expanded="false">
                                 <i className="mdi me-2 mdi-account-check"></i><span className="hide-menu">My Feedback</span></Link>
                         </li>
-                        <li className="sidebar-item"> <a className={`sidebar-link waves-effect waves-dark sidebar-link ${requestActive}`}
+                        <li className="sidebar-item"> <Link to={`/assignedFeedback`} className={`sidebar-link waves-effect waves-dark sidebar-link ${requestActive}`}
                             href="index.html" aria-expanded="false">
-                                <i className="mdi me-2 mdi-clipboard-text"></i><span className="hide-menu">Requested Feedback</span></a>
+                                <i className="mdi me-2 mdi-clipboard-text"></i><span className="hide-menu">Requested Feedback</span></Link>
                         </li>
                         <li className="sidebar-item"> <Link to={`/reportingFeedback`} className={`sidebar-link waves-effect waves-dark sidebar-link ${reportingActive}`}
                             href="index.html" aria-expanded="false">
