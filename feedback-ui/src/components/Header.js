@@ -1,3 +1,5 @@
+import CurrentUserSelector from "../features/users/CurrentUserSelector"
+import UserHeader from "../features/users/UserHeader"
 const Header = () => {
 
     return (
@@ -24,20 +26,8 @@ const Header = () => {
                                 href=""><i className="ti-menu ti-close"></i></a>
                         </li>
                     </ul>
-                    <ul className="navbar-nav me-auto mt-md-0 ">
-
-                        <li className="nav-item search-box">
-                            <a className="nav-link text-muted" href=""><i className="ti-search"></i></a>
-                        </li>
-                    </ul>
-                    <ul className="navbar-nav">
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../assets/images/users/1.jpg" alt="user" className="profile-pic me-2" />Markarn Doe
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
-                        </li>
-                    </ul>
+                    <CurrentUserSelector />
+                    <UserHeader />
                 </div>
             </nav>
         </header>
