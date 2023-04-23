@@ -15,11 +15,11 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface FeedbackMongoRepository extends ReactiveMongoRepository<Feedback, String> {
 
-	Flux<Feedback> findAllByStatusAndActor_Id(FeedbackStatus status, String actorId, Pageable pageable);
+	Flux<Feedback> findAllByStatusAndActor_IdOrderByUpdatedDateDesc(FeedbackStatus status, String actorId, Pageable pageable);
 
 	Mono<Long> countByActor_Id(String actorId);
 
-	Flux<Feedback> findAllByStatusAndSubject_Id(FeedbackStatus status, String subjectId, Pageable pageable);
+	Flux<Feedback> findAllByStatusAndSubject_IdOrderByUpdatedDateDesc(FeedbackStatus status, String subjectId, Pageable pageable);
 
 	Mono<Long> countByStatusAndSubject_Id(FeedbackStatus status, String subjectId);
 
@@ -28,7 +28,7 @@ public interface FeedbackMongoRepository extends ReactiveMongoRepository<Feedbac
 	Flux<Feedback> findAllForSubjectIdsByStatus(FeedbackStatus status, List<String> subjectId, Pageable pageable);
 	*/
 
-	Flux<Feedback> findAllByStatusIsAndSubject_IdIn(FeedbackStatus status, List<String> subjectId, Pageable pageable);
+	Flux<Feedback> findAllByStatusIsAndSubject_IdInOrderByUpdatedDateDesc(FeedbackStatus status, List<String> subjectId, Pageable pageable);
 
 	Mono<Long> countByStatusAndSubject_IdIn(FeedbackStatus status, List<String> actorId);
 }

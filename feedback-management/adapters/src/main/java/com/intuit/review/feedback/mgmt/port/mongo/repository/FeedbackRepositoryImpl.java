@@ -57,7 +57,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
 	@Override
 	public Flux<FeedbackBo> getInitializedFeedbacksForActor(String actorId, int page, int size) {
 		log.info("Getting all initialized feedbacks for actorId={}", actorId);
-		return repository.findAllByStatusAndActor_Id(FeedbackStatus.INITIALIZED, actorId, PageRequest.of(page - 1, size))
+		return repository.findAllByStatusAndActor_IdOrderByUpdatedDateDesc(FeedbackStatus.INITIALIZED, actorId, PageRequest.of(page - 1, size))
 			.doOnError(throwable -> {
 				log.error("Cannot get initialized feedbacks", throwable);
 				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
@@ -87,7 +87,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
 	@Override
 	public Flux<FeedbackBo> getMyFeedbacks(String subjectId, int page, int size) {
 		log.info("Getting all feedbacks for subjectId={}", subjectId);
-		return repository.findAllByStatusAndSubject_Id(FeedbackStatus.FINALIZED, subjectId, PageRequest.of(page - 1, size))
+		return repository.findAllByStatusAndSubject_IdOrderByUpdatedDateDesc(FeedbackStatus.FINALIZED, subjectId, PageRequest.of(page - 1, size))
 			.doOnError(throwable -> {
 				log.error("Cannot get feedbacks", throwable);
 				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
@@ -117,7 +117,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
 	@Override
 	public Flux<FeedbackBo> getDirectReportingFeedbacks(List<String> subjectIds, int page, int size) {
 		log.info("Getting all feedbacks for subjectId={}", subjectIds);
-		return repository.findAllByStatusIsAndSubject_IdIn(FeedbackStatus.FINALIZED, subjectIds, PageRequest.of(page - 1, size))
+		return repository.findAllByStatusIsAndSubject_IdInOrderByUpdatedDateDesc(FeedbackStatus.FINALIZED, subjectIds, PageRequest.of(page - 1, size))
 			.doOnError(throwable -> {
 				log.error("Cannot get feedbacks", throwable);
 				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
