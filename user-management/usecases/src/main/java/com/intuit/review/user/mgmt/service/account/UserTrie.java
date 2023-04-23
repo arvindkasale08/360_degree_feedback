@@ -1,6 +1,7 @@
 package com.intuit.review.user.mgmt.service.account;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,9 +9,9 @@ import java.util.Map;
 public class UserTrie {
 
 	public static final int MAX_SUGGESTIONS = 10;
-	private Node root = new Node('\0');
+	private static Node root = new Node('\0');
 
-	public void insert(String word) {
+	public static void insert(String word) {
 		Node curr = root;
 		for (char ch : word.toCharArray()) {
 			if (!curr.children.containsKey(ch)) {
@@ -21,7 +22,7 @@ public class UserTrie {
 		curr.isEnd = true;
 	}
 
-	public List<String> getSuggestions(String prefix) {
+	public static List<String> getSuggestions(String prefix) {
 		List<String> result = new ArrayList<>();
 		Node curr = getLast(prefix);
 		if (curr == null)
@@ -32,9 +33,10 @@ public class UserTrie {
 		return result;
 	}
 
-	private void dfs(Node curr, StringBuilder builder, List<String> result) {
+	private static void dfs(Node curr, StringBuilder builder, List<String> result) {
 		if (curr != null && curr.isEnd) {
-			result.add(builder.toString());
+			String[] s = builder.toString().split(" ");
+			result.addAll(Arrays.asList(s));
 		}
 		if (curr == null || result.size() > MAX_SUGGESTIONS)
 			return;
@@ -47,7 +49,7 @@ public class UserTrie {
 		}
 	}
 
-	private Node getLast(String prefix) {
+	private static Node getLast(String prefix) {
 		Node curr = root;
 		for (char ch : prefix.toCharArray()) {
 			if (!curr.children.containsKey(ch)) return null;
@@ -56,7 +58,7 @@ public class UserTrie {
 		return curr;
 	}
 
-	class Node {
+	static class Node {
 		char val;
 		Map<Character, Node> children;
 		boolean isEnd;

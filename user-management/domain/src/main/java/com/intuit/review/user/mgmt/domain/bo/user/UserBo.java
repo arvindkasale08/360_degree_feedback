@@ -22,4 +22,8 @@ public class UserBo extends AuditableBo {
 	private String managerId;
 	private ProfileBo profile;
 	private UserStatus status;
+
+	public String getName() {
+		return profile.getFirstName() + " " + profile.getLastName();
+	}
 }

@@ -9,22 +9,22 @@ import org.junit.jupiter.api.Test;
 
 class UserTrieTest {
 
-	UserTrie userTrie = new UserTrie();
-
 	@Test
 	void getSuggestions() {
 		// given
 		List<String> usernames = Arrays.asList("Arvind Kasale", "Ankit Bhatt", "Umesh Wadhwani", "Umakant Waghe", "Arpit Jain", "Mukund Waghmare");
 		for (String u : usernames) {
-			userTrie.insert(u);
+			UserTrie.insert(u);
 		}
 
 		// when then
-		List<String> res1 = userTrie.getSuggestions("A");
-		assertEquals(res1.size(), 3);
+		List<String> res1 = UserTrie.getSuggestions("A");
+		System.out.println(res1);
+		assertEquals(res1.size(), 6);
 
-		List<String> res2 = userTrie.getSuggestions("U");
-		assertEquals(res2.size(), 2);
+		List<String> res2 = UserTrie.getSuggestions("U");
+		System.out.println(res2);
+		assertEquals(res2.size(), 4);
 
 	}
 }

@@ -68,7 +68,7 @@ public class UserUC {
 	}
 
 	public Flux<UserBo> searchUsers(String searchText) {
-		UserBo[] users = new UserBo[] {
+		/*UserBo[] users = new UserBo[] {
 			UserBo.builder()
 				.id("64449f2baa96b65445caf5a2")
 				.username("sanjay.arora")
@@ -88,9 +88,11 @@ public class UserUC {
 					.lastName("Wadhwani")
 					.build())
 				.build(),
-		};
+		};*/
 
-		return Flux.fromArray(users)
+		return Flux.fromIterable(UserTrie.getSuggestions(searchText))
+			.collectList()
+			.flatMapMany(userRepository::getAllUsersWithName)
 			.doOnError(error -> {
 				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
 					.message("Error while fetching all users")
@@ -99,5 +101,6 @@ public class UserUC {
 						.build())).build();
 				throw new ServiceException(errorBo);
 			});
+		//return Flux.empty();
 	}
 }

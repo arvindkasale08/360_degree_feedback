@@ -1,5 +1,7 @@
 package com.intuit.review.user.mgmt.port.mongo.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +16,6 @@ public interface UserMongoRepository extends ReactiveMongoRepository<User, Strin
 	Mono<User> findDistinctFirstByExternalId(String externalId);
 
 	Flux<User> findAllByManagerIdIs(String managerId);
+
+	Flux<User> findAllByProfile_FirstNameInOrProfile_LastNameIn(List<String> lst1, List<String> lst2);
 }

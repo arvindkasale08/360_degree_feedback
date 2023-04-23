@@ -1,6 +1,7 @@
 package com.intuit.review.user.mgmt.port.mongo.repository;
 
 import java.util.Arrays;
+import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +57,23 @@ public class UserRepositoryImpl implements UserRepository {
 				log.error("Cannot get reporting for manager", throwable);
 				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
 					.message("Cannot get reporting for managers")
+					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+						.message(throwable.getMessage()).build()))
+					.build();
+				throw new ServiceException(errorBo);
+			})
+			.map(mapper::mapEntityToBo);
+	}
+
+	@Override
+	public Flux<UserBo> getAllUsersWithName(List<String> names) {
+		log.info("Fetching all active users from database with name");
+		return repository.findAllByProfile_FirstNameInOrProfile_LastNameIn(names, names)
+			.filter(user -> user.getStatus() == UserStatus.ACTIVE)
+			.doOnError(throwable -> {
+				log.error("Cannot get all active users", throwable);
+				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+					.message("Cannot get all active users")
 					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
 						.message(throwable.getMessage()).build()))
 					.build();

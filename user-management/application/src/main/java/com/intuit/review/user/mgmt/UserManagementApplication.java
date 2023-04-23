@@ -7,10 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.reactive.result.method.RequestMappingInfo;
 import org.springframework.web.reactive.result.method.annotation.RequestMappingHandlerMapping;
+
+import com.intuit.review.user.mgmt.service.port.mongo.UserRepository;
 
 @SpringBootApplication
 @Slf4j
@@ -24,6 +27,11 @@ public class UserManagementApplication {
 		Map<RequestMappingInfo, HandlerMethod> map = requestMappingHandlerMapping
 			.getHandlerMethods();
 		map.forEach((key, value) -> log.info("{} {}", key, value));
+	}
+
+	@Bean
+	public TrieLoader trieLoader(UserRepository userRepository) {
+		return new TrieLoader(userRepository);
 	}
 
 }
