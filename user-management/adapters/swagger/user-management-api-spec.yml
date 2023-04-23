@@ -285,6 +285,8 @@ definitions:
         type: string
       designation:
         type: string
+      imageUrl:
+        type: string
 
   UserStatus:
     type: string

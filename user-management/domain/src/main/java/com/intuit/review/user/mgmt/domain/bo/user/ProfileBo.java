@@ -14,4 +14,5 @@ public class ProfileBo {
 	private String email;
 	private String businessUnit;
 	private String designation;
+	private String imageUrl;
 }

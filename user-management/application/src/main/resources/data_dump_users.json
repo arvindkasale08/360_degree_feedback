@@ -8,7 +8,8 @@
       "lastName": "Arora",
       "email": "sanjay.arora@gmail.com",
       "businessUnit": "Development Center India",
-      "designation": "VP"
+      "designation": "VP",
+      "imageUrl": "../assets/images/users/4.jpg"
     },
     "status": "ACTIVE"
   },
@@ -21,7 +22,8 @@
       "lastName": "Wadhwani",
       "email": "umesh.wadhwani@gmail.com",
       "businessUnit": "Core Engineering",
-      "designation": "Senior Manager"
+      "designation": "Senior Manager",
+      "imageUrl": "../assets/images/users/1.jpg"
     },
     "status": "ACTIVE"
   },
@@ -34,7 +36,8 @@
       "lastName": "Mohite",
       "email": "sandhya.mohite@gmail.com",
       "businessUnit": "Professional Services",
-      "designation": "Senior Manager"
+      "designation": "Senior Manager",
+      "imageUrl": "../assets/images/users/2.jpg"
     },
     "status": "ACTIVE"
   },
@@ -47,7 +50,8 @@
       "lastName": "Kasale",
       "email": "arvind.kasale@gmail.com",
       "businessUnit": "Core Engineering",
-      "designation": "Staff Software Developer"
+      "designation": "Staff Software Developer",
+      "imageUrl": "../assets/images/users/3.jpg"
     },
     "status": "ACTIVE"
   },
@@ -60,7 +64,8 @@
       "lastName": "Deshpande",
       "email": "anuja.deshpande@gmail.com",
       "businessUnit": "Core Engineering",
-      "designation": "Senior Software Developer"
+      "designation": "Senior Software Developer",
+      "imageUrl": "../assets/images/users/5.jpg"
     },
     "status": "ACTIVE"
   },
@@ -73,7 +78,8 @@
       "lastName": "Jain",
       "email": "arpit.jain@gmail.com",
       "businessUnit": "Core Engineering",
-      "designation": "Software Developer"
+      "designation": "Software Developer",
+      "imageUrl": "../assets/images/users/6.jpg"
     },
     "status": "ACTIVE"
   },
@@ -86,7 +92,8 @@
       "lastName": "Bhatt",
       "email": "arpit.jain@gmail.com",
       "businessUnit": "Core Engineering",
-      "designation": "Staff Software Developer"
+      "designation": "Staff Software Developer",
+      "imageUrl": "../assets/images/users/7.jpg"
     },
     "status": "ACTIVE"
   },
@@ -99,7 +106,8 @@
       "lastName": "Kumar",
       "email": "gaurav.kumar@gmail.com",
       "businessUnit": "Core Engineering",
-      "designation": "Staff Software Developer"
+      "designation": "Staff Software Developer",
+      "imageUrl": "../assets/images/users/8.jpg"
     },
     "status": "ACTIVE"
   },
@@ -112,7 +120,8 @@
       "lastName": "Pathak",
       "email": "ayushi.pathak@gmail.com",
       "businessUnit": "Professional Service",
-      "designation": "Associate Software Developer"
+      "designation": "Associate Software Developer",
+      "imageUrl": "../assets/images/users/agent.jpg"
     },
     "status": "ACTIVE"
   },
@@ -125,7 +134,8 @@
       "lastName": "Bhatt",
       "email": "arun.bhatt@gmail.com",
       "businessUnit": "Professional Service",
-      "designation": "Software Developer"
+      "designation": "Software Developer",
+      "imageUrl": "../assets/images/users/agent2.jpg"
     },
     "status": "ACTIVE"
   },
@@ -138,7 +148,8 @@
       "lastName": "Katore",
       "email": "tejal.katore@gmail.com",
       "businessUnit": "Professional Service",
-      "designation": "Software Testing Engineer"
+      "designation": "Software Testing Engineer",
+      "imageUrl": "../assets/images/users/d1.jpg"
     },
     "status": "ACTIVE"
   },
@@ -151,7 +162,8 @@
       "lastName": "Dalvi",
       "email": "manoj.dalvi@gmail.com",
       "businessUnit": "Professional Service",
-      "designation": "Software Testing Engineer"
+      "designation": "Software Testing Engineer",
+      "imageUrl": "../assets/images/users/d2.jpg"
     },
     "status": "ACTIVE"
   }
