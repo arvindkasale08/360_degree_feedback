@@ -6,7 +6,7 @@ const Header = () => {
         <header className="topbar" data-navbarbg="skin6">
             <nav className="navbar top-navbar navbar-expand-md navbar-dark">
                 <div className="navbar-header" data-logobg="skin6">
-                    <a className="navbar-brand ms-4" href="index.html">
+                    <a className="navbar-brand ms-4" href="/">
                         <b className="logo-icon">
                             <img src="../assets/images/logo-light-icon.png" alt="homepage" className="dark-logo" />
 

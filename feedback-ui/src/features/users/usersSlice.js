@@ -16,12 +16,12 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
     return response.data.users
 })
 
-export const searchSubjectUsers = createAsyncThunk('users/searchSubject', async (searchText) => {
+export const searchSubjectUsers = createAsyncThunk('users/searchSubject', async ({ searchText }) => {
     const response = await axios.get(USERS_URL + "search?searchText="+ searchText);
     return response.data.users
 })
 
-export const searchActorUsers = createAsyncThunk('users/searchActor', async (searchText) => {
+export const searchActorUsers = createAsyncThunk('users/searchActor', async ({ searchText }) => {
     const response = await axios.get(USERS_URL + "search?searchText="+ searchText);
     return response.data.users
 })
