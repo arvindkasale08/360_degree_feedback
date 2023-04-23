@@ -34,6 +34,18 @@ export const finalizeFeedback = createAsyncThunk('feedback/finalize', async({bod
     return response.data
 })
 
+export const initializeFeedback = createAsyncThunk('feedback/initialize', async({actorId, requestorId, subjectId}) => {
+    console.log("In Initialize Feedback")
+    const data = {
+        actorId,
+        requestorId,
+        subjectId
+    }
+    console.log(data)
+    const response = await axios.post(FEEDBACKS_URL + "/initialize", data)
+    return response.data
+})
+
 const feedbackSlice = createSlice({
     name: 'feedbacks',
     initialState,
@@ -59,6 +71,9 @@ const feedbackSlice = createSlice({
                 assignedFeedbacks.splice(objWithIdIndex, 1);
             }
             state.assignedFeedbacks = assignedFeedbacks;
+        })
+        .addCase(initializeFeedback.fulfilled, (state, action) => {
+            // Do something later
         })
     }
 })

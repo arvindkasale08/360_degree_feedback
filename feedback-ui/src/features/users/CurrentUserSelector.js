@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAllUsers, addCurrentUser, fetchDirectReportings } from './usersSlice'
 import { fetchMyFeedbacks, fetchReportingFeedbacks, fetchAssignedFeedbacks } from "../feedbacks/feedbackSlice";
+import { useNavigate } from 'react-router-dom';
 
 const CurrentUserSelector = () => {
     const users = useSelector(selectAllUsers)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const userOptions = users.map(user => (
         <option key={user.id} value={user.id}>
@@ -20,6 +22,7 @@ const CurrentUserSelector = () => {
         dispatch(fetchReportingFeedbacks(user.externalId));
         dispatch(fetchAssignedFeedbacks(user.externalId));
         dispatch(fetchDirectReportings(user.externalId));
+        navigate('/')
     }
 
     return (

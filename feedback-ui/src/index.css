@@ -20,4 +20,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .search-dd {
+    margin-left: -35px !important;
+  }
+
+  .search-dd li {
+    list-style-type: none;
+    line-height: 25px;
+    padding: 2px 5px;
+    margin: 5px 0px;
+    background-color: #d4eff3;
+    color: #42C6DA;
+    cursor: pointer;
+  }
   

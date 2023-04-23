@@ -76,11 +76,11 @@ const AssignedFeedback = () => {
                                     <div className="form-group">
                                         <label htmlFor='' className="col-md-12 mb-0">Feedback</label>
                                         <div className="col-md-12">
-                                            <textarea id="data" name="data" rows="5" class="form-control ps-0 form-control-line" onChange={onDataChanged}></textarea>
+                                            <textarea id="data" name="data" rows="5" className="form-control ps-0 form-control-line" onChange={onDataChanged}></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 d-flex">
-                                        <button class="btn btn-success mx-auto mx-md-0 text-white" onClick={onSaveFeedbackClicked} disabled={!canSave}>Save Feedback</button>
+                                    <div className="col-sm-12 d-flex">
+                                        <button className="btn btn-success mx-auto mx-md-0 text-white" onClick={onSaveFeedbackClicked} disabled={!canSave}>Save Feedback</button>
                                     </div>
                                     <div className="form-group">
                                         <div className="col-md-12">

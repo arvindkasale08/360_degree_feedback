@@ -32,7 +32,7 @@ const LeftNav = () => {
                         </li>
                         <li className="sidebar-item"> <Link to={`/assignedFeedback`} className={`sidebar-link waves-effect waves-dark sidebar-link ${requestActive}`}
                             href="index.html" aria-expanded="false">
-                                <i className="mdi me-2 mdi-clipboard-text"></i><span className="hide-menu">Requested Feedback</span></Link>
+                                <i className="mdi me-2 mdi-clipboard-text"></i><span className="hide-menu">Assigned Feedback</span></Link>
                         </li>
                         <li className="sidebar-item"> <Link to={`/reportingFeedback`} className={`sidebar-link waves-effect waves-dark sidebar-link ${reportingActive}`}
                             href="index.html" aria-expanded="false">

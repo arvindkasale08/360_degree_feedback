@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { getCurrentUser, getDirectReportings, fetchDirectReportings } from "../users/usersSlice";
 import ReportingExcerpt from "../users/ReportingExcerpt"; 
+import { Link } from "react-router-dom";
 
 const DirectReportingList = () => {
     const dispatch = useDispatch();
@@ -19,11 +20,6 @@ const DirectReportingList = () => {
     } else {
         const name = currentUser.profile.firstName + " " + currentUser.profile.lastName;
         const { externalId } = currentUser;
-        console.log(directReporting);
-        /*if (directReporting == null || (directReporting[0] !== undefined && currentUser.externalId != directReporting[0].managerId)) {
-            console.log("Fetching direct reportings");
-            dispatch(fetchDirectReportings(externalId));
-        }*/
         let innerContent;
 
         if (directReporting == null || directReporting[0] === undefined) {
@@ -43,7 +39,7 @@ const DirectReportingList = () => {
             </div>
             <div className="card-body">
                 <div className="message-box contact-box">
-                    <h2 className="add-ct-btn"><button type="button" className="btn btn-circle btn-lg btn-success waves-effect waves-dark">+</button>
+                    <h2 className="add-ct-btn"><Link to={`/requestFeedback`} title="Request Feedback" type="button" className="btn btn-circle btn-lg btn-success waves-effect waves-dark">+</Link>
                     </h2>
                     <div className="message-widget contact-widget">
                         {innerContent}
