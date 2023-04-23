@@ -10,6 +10,7 @@ import com.intuit.review.user.mgmt.domain.bo.exception.ErrorConstants;
 import com.intuit.review.user.mgmt.domain.bo.exception.PaginationException;
 import com.intuit.review.user.mgmt.domain.bo.exception.UserNotFoundException;
 import com.intuit.review.user.mgmt.domain.bo.exception.ServiceException;
+import com.intuit.review.user.mgmt.domain.bo.user.ProfileBo;
 import com.intuit.review.user.mgmt.domain.bo.user.UserBo;
 import com.intuit.review.user.mgmt.service.port.mongo.UserRepository;
 import reactor.core.publisher.Flux;
@@ -59,6 +60,40 @@ public class UserUC {
 			.doOnError(error -> {
 				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
 					.message("Error while fetching direct reporings for manager ".concat(managerId))
+					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
+						.message(error.getMessage())
+						.build())).build();
+				throw new ServiceException(errorBo);
+			});
+	}
+
+	public Flux<UserBo> searchUsers(String searchText) {
+		UserBo[] users = new UserBo[] {
+			UserBo.builder()
+				.id("64449f2baa96b65445caf5a2")
+				.username("sanjay.arora")
+				.externalId("a267db4e-c5cc-4656-abda-03b130cb45c6")
+				.profile(ProfileBo.builder()
+					.firstName("Sanjay")
+					.lastName("Arora")
+					.build())
+				.build(),
+
+			UserBo.builder()
+				.id("64449f2baa96b65445caf5a3")
+				.username("umesh.wadhwani")
+				.externalId("fff6a5e1-d52a-4b79-9908-2e227f2a4261")
+				.profile(ProfileBo.builder()
+					.firstName("Umesh")
+					.lastName("Wadhwani")
+					.build())
+				.build(),
+		};
+
+		return Flux.fromArray(users)
+			.doOnError(error -> {
+				ErrorBo errorBo = ErrorBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR).status(500)
+					.message("Error while fetching all users")
 					.details(Arrays.asList(ErrorDetailBo.builder().code(ErrorConstants.INTERNAL_SERVER_ERROR)
 						.message(error.getMessage())
 						.build())).build();

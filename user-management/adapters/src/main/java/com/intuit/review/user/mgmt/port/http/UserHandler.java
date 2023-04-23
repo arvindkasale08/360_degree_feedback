@@ -43,4 +43,16 @@ public class UserHandler {
 				return responseDTO;
 			});
 	}
+
+	public Mono<UserListResponseDTO> search(String searchText) {
+		log.info("Searching users for text={}" , searchText);
+		return userUC.searchUsers(searchText)
+			.map(responseDtoBoMapper::mapBoToDto)
+			.collectList()
+			.map(users -> {
+				UserListResponseDTO responseDTO = new UserListResponseDTO();
+				responseDTO.users(users);
+				return responseDTO;
+			});
+	}
 }

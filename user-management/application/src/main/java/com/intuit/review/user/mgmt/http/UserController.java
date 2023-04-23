@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.intuit.review.user.mgmt.port.http.UserHandler;
@@ -42,6 +43,12 @@ public class UserController {
 	@RequestMapping(value = "{externalId}/directReporting", method = RequestMethod.GET)
 	public Mono<ResponseEntity<UserListResponseDTO>> getDirectReportingForManager(@Valid @PathVariable("externalId") String externalId) {
 		return userHandler.getDirectReportingForManager(externalId)
+			.map(userListResponseDTO -> new ResponseEntity<>(userListResponseDTO, HttpStatus.OK));
+	}
+
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public Mono<ResponseEntity<UserListResponseDTO>> search(@RequestParam(value = "searchText", required = true) String searchText) {
+		return userHandler.search(searchText)
 			.map(userListResponseDTO -> new ResponseEntity<>(userListResponseDTO, HttpStatus.OK));
 	}
 }
