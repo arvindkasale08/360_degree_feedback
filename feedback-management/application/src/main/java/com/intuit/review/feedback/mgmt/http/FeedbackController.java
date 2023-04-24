@@ -29,8 +29,8 @@ public class FeedbackController {
 
 	@Autowired
 	private FeedbackHandler feedbackHandler;
-	private static final Integer DEFAULT_PAGE_SIZE = 10;
-	private static final Integer MAX_PAGE_SIZE = 50;
+	private static final Integer DEFAULT_PAGE_SIZE = 100;
+	private static final Integer MAX_PAGE_SIZE = 500;
 
 	@RequestMapping(value = "initialize", method = RequestMethod.POST)
 	public Mono<ResponseEntity<FeedbackResponseDTO>> initializeFeedbackRequest(@Valid @RequestBody InitializeFeedbackRequestDTO request) {
@@ -51,7 +51,7 @@ public class FeedbackController {
 	}
 
 	@RequestMapping(value = "assignedToActor/{id}", method = RequestMethod.GET)
-	public Mono<ResponseEntity<FeedbackListResponseDTO>> assignedToActor(@Valid @PathVariable("id") String id, @RequestParam(value = "page", required = true, defaultValue = "1") Integer page, @RequestParam(value = "size", required = false, defaultValue = "10") Integer size) {
+	public Mono<ResponseEntity<FeedbackListResponseDTO>> assignedToActor(@Valid @PathVariable("id") String id, @RequestParam(value = "page", required = true, defaultValue = "1") Integer page, @RequestParam(value = "size", required = false, defaultValue = "100") Integer size) {
 		Integer pageSize = getPageSize(size);
 		return feedbackHandler.getInitializedFeedbacksForActor(id, page, pageSize)
 			.map(responseDto -> new ResponseEntity<>(responseDto, HttpStatus.OK));
