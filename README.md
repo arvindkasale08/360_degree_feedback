@@ -47,3 +47,8 @@ Handles UI for the 360 degree feedback application
 ## How to run locally
 
 Refer individual repos
+
+## PPT Link
+
+[Craft Demo PPT](https://docs.google.com/presentation/d/1QdqAnUAPVLdtsENMxrNigQPApx98ZpcA/edit?usp=sharing&ouid=112753739027478591433&rtpof=true&sd=true)
+
