@@ -75,3 +75,28 @@ scrape_configs:
 ##############################
 usermgmt:
   baseurl: http://localhost:7070
+
+
+########################################
+# Confluent Kafka CONFIGURATION
+########################################
+confluentkafka:
+  bootstrapServers: pkc-6ojv2.us-west4.gcp.confluent.cloud:9092
+  enabled: true
+  user: K2UNESWC7SUHJCX7
+  password: b/ycOFOMzN6Oc/3PRikWJEaN/oFaTCWU4gHCu5rkQFP8jdJomJ8n0mawsZmQ678D
+  securityProtocol: SASL_SSL
+  sasl:
+    mechanism: PLAIN
+    jaasConfig: org.apache.kafka.common.security.plain.PlainLoginModule
+  options:
+    notificationRequest:
+      topic: notifications
+      clientId: feedback-management.notification_requests
+      keySerializer: org.apache.kafka.common.serialization.StringSerializer
+      valueSerializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+  schemaRegistry:
+    url: https://psrc-k0w8v.us-central1.gcp.confluent.cloud
+    autoRegister: true
+    useLatestVersion: true
+    nameStrategy: io.confluent.kafka.serializers.subject.TopicNameStrategy

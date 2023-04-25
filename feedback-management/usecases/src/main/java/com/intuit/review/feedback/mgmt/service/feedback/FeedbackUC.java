@@ -2,6 +2,8 @@ package com.intuit.review.feedback.mgmt.service.feedback;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,6 +18,7 @@ import com.intuit.review.feedback.mgmt.domain.exception.FeedbackNotFoundExceptio
 import com.intuit.review.feedback.mgmt.domain.exception.PaginationException;
 import com.intuit.review.feedback.mgmt.domain.exception.ServiceException;
 import com.intuit.review.feedback.mgmt.service.port.http.UserService;
+import com.intuit.review.feedback.mgmt.service.port.kafka.MessageSenderService;
 import com.intuit.review.feedback.mgmt.service.port.mongo.FeedbackRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,6 +28,7 @@ public class FeedbackUC {
 
 	private final FeedbackRepository feedbackRepository;
 	private final UserService userService;
+	private final MessageSenderService messageSenderService;
 
 	/**
 	 * Initializes a feedback with bare minimum inforamtion into the database.
@@ -61,7 +65,11 @@ public class FeedbackUC {
 				})
 			)
 			// save the entity to database
-			.flatMap(feedbackRepository::initializeFeedback);
+			.flatMap(feedbackRepository::initializeFeedback)
+			.flatMap(feedbackBo -> {
+				return messageSenderService.publishFeedbackNotification(feedbackBo.getId(), feedbackBo, addheaders(feedbackBo, "FEEDBACK_INITIALIZED"))
+					.thenReturn(feedbackBo);
+			});
 	}
 
 	public Mono<FeedbackBo> finalizeFeedback(String id, FeedbackLightBo lightBo) {
@@ -87,6 +95,10 @@ public class FeedbackUC {
 						.build();
 					throw new ServiceException(errorBo);
 				}
+			})
+			.flatMap(feedbackBo -> {
+				return messageSenderService.publishFeedbackNotification(feedbackBo.getId(), feedbackBo, addheaders(feedbackBo, "FEEDBACK_FINALIZED"))
+					.thenReturn(feedbackBo);
 			});
 	}
 
@@ -219,5 +231,14 @@ public class FeedbackUC {
 
 	private long getValidUntilTime() {
 		return Instant.now().toEpochMilli() + CommonConstant.EXPIRY;
+	}
+
+	private Map<String, String> addheaders(FeedbackBo feedbackBo, String type) {
+		return new HashMap<String, String>() {
+			{
+				put("EVENT_TYPE", type);
+				put("RESOURCE", "FEEDBACK");
+			}
+		};
 	}
 }

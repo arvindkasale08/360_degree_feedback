@@ -8,6 +8,7 @@ version '0.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven { url "https://packages.confluent.io/maven/" }
 }
 
 dependencies {
@@ -24,6 +25,12 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:${jacksonVersion}"
     implementation "org.projectlombok:lombok:${lombokVersion}"
+    // Add reactive kafka
+    implementation "org.apache.avro:avro:${avroVersion}"
+    implementation "org.apache.kafka:kafka-clients:${kafkaLibsVersion}"
+    implementation "io.projectreactor.kafka:reactor-kafka:${reactiveKafkaVersion}"
+    implementation "io.confluent:kafka-avro-serializer:${confluentKafkaVersion}"
+
     implementation "net.rakugakibox.spring.boot:orika-spring-boot-starter:${orikaVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"

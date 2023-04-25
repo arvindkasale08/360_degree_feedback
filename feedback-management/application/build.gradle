@@ -9,6 +9,7 @@ version '0.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven { url "https://packages.confluent.io/maven/" }
 }
 
 dependencies {
@@ -20,6 +21,8 @@ dependencies {
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation("org.projectlombok:lombok:${lombokVersion}")
     implementation "net.rakugakibox.spring.boot:orika-spring-boot-starter:${orikaVersion}"
+    implementation "io.projectreactor.kafka:reactor-kafka:${reactiveKafkaVersion}"
+    //implementation "javax.ws.rs:javax.ws.rs-api:2.0.1"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
