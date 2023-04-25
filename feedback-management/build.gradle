@@ -14,7 +14,7 @@ buildscript {
 		kafkaLibsVersion = '3.0.0'
 		reactiveKafkaVersion = '1.3.9'
 		avroVersion = '1.9.1'
-		confluentKafkaVersion = '7.0.0'
+		confluentKafkaVersion = '7.3.3'
 	}
 }
 

@@ -83,8 +83,8 @@ usermgmt:
 confluentkafka:
   bootstrapServers: pkc-6ojv2.us-west4.gcp.confluent.cloud:9092
   enabled: true
-  user: NQKRVQCN2IJBMJPB
-  password: rh5audYdWWoTUhMIcURr1PZi7K1lqhwoiAcf2GQGxXF4Nj88pFbML3ixtIzl9s1U
+  user: K2UNESWC7SUHJCX7
+  password: b/ycOFOMzN6Oc/3PRikWJEaN/oFaTCWU4gHCu5rkQFP8jdJomJ8n0mawsZmQ678D
   securityProtocol: SASL_SSL
   sasl:
     mechanism: PLAIN
@@ -96,7 +96,7 @@ confluentkafka:
       keySerializer: org.apache.kafka.common.serialization.StringSerializer
       valueSerializer: io.confluent.kafka.serializers.KafkaAvroSerializer
   schemaRegistry:
-    url: pkc-6ojv2.us-west4.gcp.confluent.cloud:8081
+    url: https://psrc-0kywq.us-east-2.aws.confluent.cloud
     autoRegister: false
     useLatestVersion: true
     nameStrategy: io.confluent.kafka.serializers.subject.TopicNameStrategy
