@@ -132,7 +132,8 @@ public class ConfluentKafkaConfigurationOptionsProvider {
     Map<String, Object> schemaProps = new HashMap<>();
     if (properties.getSchemaRegistry() != null) {
       ConfluentKafkaProperties.SchemaRegistry schemaRegistryConfig = properties.getSchemaRegistry();
-      schemaProps.put("basic.auth.user.info", "TXA7OMKFNKHGBAJS:Qv4+qzqZzsh4A5z8ubh2q+20LZgcc83S1uOW/ly0DUVY3iStwVayPqASa4PzG9kI");
+      // hardcoding for now
+      schemaProps.put("basic.auth.user.info", "V65TAMFZ66CAJ4BQ:uLHkclsuiviGzNNmQBxn3PXBt1qAd5829XSecE4Fbx7K4F3SY9QrHIB2XluPzthy");
       schemaProps.put("basic.auth.credentials.source", "USER_INFO");
       schemaProps.put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryConfig.getUrl());
       schemaProps

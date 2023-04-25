@@ -96,7 +96,7 @@ confluentkafka:
       keySerializer: org.apache.kafka.common.serialization.StringSerializer
       valueSerializer: io.confluent.kafka.serializers.KafkaAvroSerializer
   schemaRegistry:
-    url: https://psrc-0kywq.us-east-2.aws.confluent.cloud
-    autoRegister: false
+    url: https://psrc-k0w8v.us-central1.gcp.confluent.cloud
+    autoRegister: true
     useLatestVersion: true
     nameStrategy: io.confluent.kafka.serializers.subject.TopicNameStrategy

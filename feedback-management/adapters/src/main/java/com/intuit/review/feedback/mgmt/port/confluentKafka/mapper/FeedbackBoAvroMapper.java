@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import com.intuit.review.feedback.mgmt.domain.bo.feedback.FeedbackBo;
+import com.intuit.review.feedback.mgmt.domain.bo.feedback.FeedbackStatus;
 import com.intuit.review.feedback.mgmt.port.avro.FeedbackNotification;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFacade;
@@ -29,7 +30,7 @@ public class FeedbackBoAvroMapper implements OrikaMapperFactoryConfigurer {
 					super.mapAtoB(bo, event, context);
 					event.setObjectId(bo.getId());
 					event.setObjectType(FEEDBACK);
-					event.setEventMetadata(EventMetadataUtils.getEventMetadata(FEEDBACK_NOTIFICATION));
+					event.setEventMetadata(EventMetadataUtils.getEventMetadata(FEEDBACK_NOTIFICATION, bo.getStatus().name()));
 				}
 
 				@Override

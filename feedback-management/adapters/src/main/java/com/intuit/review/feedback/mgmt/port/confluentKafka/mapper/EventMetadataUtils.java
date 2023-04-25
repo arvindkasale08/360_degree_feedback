@@ -8,11 +8,11 @@ import com.intuit.review.feedback.mgmt.port.avro.EventMetadata;
 public class EventMetadataUtils {
 
 
-	public static EventMetadata getEventMetadata(String type) {
+	public static EventMetadata getEventMetadata(String type, String operation) {
 		EventMetadata metadata = new EventMetadata();
 		metadata.setId(UUID.randomUUID().toString());
 		metadata.setTimestamp(LocalDateTime.now().toString());
-		metadata.setOperation(null);
+		metadata.setOperation(operation);
 		metadata.setType(type);
 
 		return metadata;
