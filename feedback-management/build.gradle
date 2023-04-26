@@ -22,6 +22,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version "${springBootVersion}"
 	id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+	id 'application'
 }
 
 group = 'com.intuit.review'
@@ -71,4 +72,10 @@ bootJar {
 
 jar {
 	enabled = true
+}
+
+application {
+	applicationDefaultJvmArgs = [
+			"--add-opens java.base/java.lang=ALL-UNNAMED"
+	]
 }
